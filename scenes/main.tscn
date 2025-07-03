@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://ttefn00ejmbp"]
+
+[ext_resource type="Script" uid="uid://nbg7ive7pwbf" path="res://scenes/main.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://enqj04q6cvff" path="res://assets/models/BerimbauKit.glb" id="2_0wfyh"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_o5qli")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.491193, 0, 0.871051, 0, 1, 0, -0.871051, 0, -0.491193, 9.02088, 2.52594, -6.17267)
+current = true
+
+[node name="SoundPlayer" type="AudioStreamPlayer3D" parent="."]
+max_distance = 117.03
+
+[node name="BerimbauKit" parent="." instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22567, 0, 0.131646)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DebugLabel" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Estado:"
