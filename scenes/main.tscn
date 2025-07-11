@@ -1,13 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://ttefn00ejmbp"]
+[gd_scene load_steps=4 format=3 uid="uid://ttefn00ejmbp"]
 
 [ext_resource type="Script" uid="uid://nbg7ive7pwbf" path="res://scenes/main.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://enqj04q6cvff" path="res://assets/models/BerimbauKit.glb" id="2_0wfyh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wfyh"]
+size = Vector2(102.7, 25.2)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_o5qli")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.491193, 0, 0.871051, 0, 1, 0, -0.871051, 0, -0.491193, 9.02088, 2.52594, -6.17267)
+transform = Transform3D(-0.491193, 0, 0.871051, 0, 1, 0, -0.871051, 0, -0.491193, 12.021, 2.526, -6.173)
 current = true
 
 [node name="SoundPlayer" type="AudioStreamPlayer3D" parent="."]
@@ -17,6 +20,7 @@ max_distance = 117.03
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22567, 0, 0.131646)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.988065, -0.154038, 0, 0.154038, 0.988065, 0, 0, 0, 1, -0.357379, 0.59102, -4.49169)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -24,3 +28,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22567, 0, 0.131646)
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Estado:"
+
+[node name="Pistas" type="Node2D" parent="CanvasLayer"]
+
+[node name="Pista_Solto" type="Marker2D" parent="CanvasLayer/Pistas"]
+position = Vector2(200, 100)
+
+[node name="Pista_Chiado" type="Marker2D" parent="CanvasLayer/Pistas"]
+position = Vector2(400, 100)
+
+[node name="Pista_Preso" type="Marker2D" parent="CanvasLayer/Pistas"]
+position = Vector2(600, 100)
+
+[node name="ZonaDeAcerto" type="Area2D" parent="CanvasLayer"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/ZonaDeAcerto"]
+position = Vector2(398, 652)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_0wfyh")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ZonaDeAcerto"]
+offset_left = 141.0
+offset_top = 589.0
+offset_right = 655.0
+offset_bottom = 715.0
+color = Color(0.65098, 0, 0.0901961, 0.392157)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.8
+autostart = true
+
+[connection signal="area_entered" from="CanvasLayer/ZonaDeAcerto" to="." method="_on_zona_de_acerto_area_entered"]
+[connection signal="area_exited" from="CanvasLayer/ZonaDeAcerto" to="." method="_on_zona_de_acerto_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

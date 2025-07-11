@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbnpudm2eri0j"]
+
+[ext_resource type="Texture2D" uid="uid://cjm2708jqgtff" path="res://assets/sprites/nota_chiado.png" id="1_np0oh"]
+[ext_resource type="Script" uid="uid://cxha4iabv4bmh" path="res://scripts/nota.gd" id="1_tich3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
+size = Vector2(256, 256)
+
+[node name="Nota" type="Area2D"]
+scale = Vector2(0.15, 0.15)
+script = ExtResource("1_tich3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_np0oh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jyhfs")
