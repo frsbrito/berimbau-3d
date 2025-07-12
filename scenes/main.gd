@@ -8,7 +8,8 @@ const NOTA_SCENE = preload("res://scenes/nota.tscn")
 
 # --- Referências de Nós (@onready) ---
 @onready var sound_player = $SoundPlayer
-@onready var debug_label = $CanvasLayer/DebugLabel
+#@onready var debug_label = $CanvasLayer/DebugLabel
+@onready var hud = $CanvasLayer/HUD
 @onready var pistas_container = $CanvasLayer/Pistas
 @onready var pista_solto = $CanvasLayer/Pistas/Pista_Solto
 @onready var pista_chiado = $CanvasLayer/Pistas/Pista_Chiado
@@ -32,11 +33,8 @@ func _process(_delta):
 	elif Input.is_action_pressed("dobrao_chiado"):
 		estado_atual_id = 2
 	
-	var porcentagem_acertos = 0.0
-	if total_notas_geradas > 0:
-		porcentagem_acertos = (float(total_acertos) / total_notas_geradas) * 100
-	
-	debug_label.text = "Acertos: " + str(total_acertos) + " | Erros: " + str(total_erros) + " | Precisão: " + ("%.1f" % porcentagem_acertos) + "%"
+	# Chama atualização da interface para atualizar acertos e erros
+	hud.atualizar_hud(total_acertos, total_erros)
 	
 	# Lógica do toque da baqueta
 	if Input.is_action_just_pressed("toque_baqueta"):

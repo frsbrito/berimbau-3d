@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdc5vdt0pw1ve"]
+
+[ext_resource type="Script" uid="uid://bcddj8kr6536n" path="res://scenes/hud.gd" id="1_ahhtf"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ahhtf")
+
+[node name="AcertosLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1131.0
+offset_top = 617.0
+offset_right = 1208.0
+offset_bottom = 640.0
+grow_horizontal = 0
+text = "Acertos: 0"
+
+[node name="ErrosLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1037.0
+offset_top = 617.0
+offset_right = 1096.0
+offset_bottom = 640.0
+grow_horizontal = 0
+text = "Erros: 0"
+
+[node name="PorcentagemLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1066.0
+offset_top = 648.0
+offset_right = 1181.0
+offset_bottom = 671.0
+grow_horizontal = 0
+text = "Precisão: 100%"
