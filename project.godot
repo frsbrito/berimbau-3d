@@ -12,12 +12,16 @@ config_version=5
 
 config/name="Berimbau_3D"
 run/main_scene="uid://ttefn00ejmbp"
-config/features=PackedStringArray("4.4", "Mobile")
+config/features=PackedStringArray("4.5", "Mobile")
 config/icon="uid://cyk4d832w3uap"
 
 [audio]
 
 buses/default_bus_layout=""
+
+[autoload]
+
+GameData="*res://scripts/GameData.gd"
 
 [display]
 

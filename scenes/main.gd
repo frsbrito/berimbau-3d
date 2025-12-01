@@ -1,9 +1,24 @@
 extends Node3D
 
 # --- Constantes ---
-const SOM_SOLTO = preload("res://assets/audio/som_solto.ogg")
-const SOM_PRESO = preload("res://assets/audio/som_preso.ogg")
-const SOM_CHIADO = preload("res://assets/audio/som_chiado.ogg")
+var sons_viola_solto = [
+	preload("res://assets/audio/berimbau-viola/solto/viola_solto_1.ogg"),
+	preload("res://assets/audio/berimbau-viola/solto/viola_solto_2.ogg"),
+	preload("res://assets/audio/berimbau-viola/solto/viola_solto_3.ogg"),
+	preload("res://assets/audio/berimbau-viola/solto/viola_solto_4.ogg"),
+	preload("res://assets/audio/berimbau-viola/solto/viola_solto_5.ogg")
+]
+var sons_viola_chiado = [
+	#preload("res://assets/audio/berimbau-viola/chiado/viola_chiado_1.ogg"),
+	preload("res://assets/audio/berimbau-viola/chiado/viola_chiado_2.ogg"),
+	preload("res://assets/audio/berimbau-viola/chiado/viola_chiado_3.ogg"),
+	preload("res://assets/audio/berimbau-viola/chiado/viola_chiado_4.ogg")
+]
+var sons_viola_preso = [
+	preload("res://assets/audio/berimbau-viola/preso/viola_preso_1.ogg"),
+	preload("res://assets/audio/berimbau-viola/preso/viola_preso_2.ogg"),
+	preload("res://assets/audio/berimbau-viola/preso/viola_preso_3.ogg")
+]
 const NOTA_SCENE = preload("res://scenes/nota.tscn")
 
 # --- Referências de Nós (@onready) ---
@@ -16,17 +31,19 @@ const NOTA_SCENE = preload("res://scenes/nota.tscn")
 @onready var pista_preso = $CanvasLayer/Pistas/Pista_Preso
 
 # --- Variáveis do Jogo ---
-var nomes_dos_sons = ["", "Solto", "Chiado", "Preso"]
-var toque_de_angola = [2, 2, 1, 3]
 var toque_index = 0
 var notas_na_zona = []
 var total_acertos = 0
 var total_erros = 0
 var total_notas_geradas = 0
+var toque_atual_array = []
+
+func _ready():
+	toque_atual_array = GameData.get_toque_atual_array()
 
 # --- Funções do Jogo ---
 func _process(_delta):
-	# Lógica do estado do dobrão
+	# Identifica o estado atual (1=Solto, 2=Chiado, 3=Preso)
 	var estado_atual_id = 1
 	if Input.is_action_pressed("dobrao_preso"):
 		estado_atual_id = 3
@@ -51,24 +68,33 @@ func _process(_delta):
 			notas_na_zona.erase(nota_acertada) 
 			nota_acertada.queue_free()
 		else:
-			print("ERROU! (Nenhuma nota correspondente na zona)")
+			print("ERROU!")
 		
 		# Lógica do som a tocar de acordo com input
-		var som_a_tocar = SOM_SOLTO
-		if estado_atual_id == 3:
-			som_a_tocar = SOM_PRESO
-		elif estado_atual_id == 2:
-			som_a_tocar = SOM_CHIADO
-		sound_player.stream = som_a_tocar
+		tocar_som_berimbau(estado_atual_id)
+		
+func tocar_som_berimbau(id_estado):
+	var lista_de_sons = []
+	
+	# Define qual lista usar baseada no estado
+	if id_estado == 3:
+		lista_de_sons = sons_viola_preso
+	elif id_estado == 2:
+		lista_de_sons = sons_viola_chiado
+	else:
+		lista_de_sons = sons_viola_solto
+	
+	# Escolhe um som aleatório da lista e toca
+	if lista_de_sons.size() > 0:
+		sound_player.stream = lista_de_sons.pick_random()
 		sound_player.play()
 	
 # Função Timer que gera notas, qualifica e posiciona
 func _on_timer_timeout():
 	total_notas_geradas += 1
-	
 	var nova_nota = NOTA_SCENE.instantiate()
-	var tipo_da_nota = toque_de_angola[toque_index]
-	toque_index = (toque_index + 1) % toque_de_angola.size()
+	var tipo_da_nota = toque_atual_array[toque_index]
+	toque_index = (toque_index + 1) % toque_atual_array.size()
 	
 	if tipo_da_nota == 1:
 		nova_nota.position = pista_solto.position
@@ -88,11 +114,3 @@ func _on_zona_de_acerto_area_exited(area: Area2D) -> void:
 		total_erros += 1
 		notas_na_zona.erase(area)
 		area.queue_free()
-
-func get_som_pelo_id(id):
-	if id == 1:
-		return SOM_SOLTO
-	elif id == 2:
-		return SOM_CHIADO
-	else:
-		return SOM_PRESO

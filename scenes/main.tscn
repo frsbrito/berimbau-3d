@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ttefn00ejmbp"]
 
 [ext_resource type="Script" uid="uid://nbg7ive7pwbf" path="res://scenes/main.gd" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://enqj04q6cvff" path="res://assets/models/BerimbauKit.glb" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://bd682x241b3wx" path="res://scenes/berimbau_em_cena.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cdc5vdt0pw1ve" path="res://scenes/hud.tscn" id="3_sugp2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wfyh"]
@@ -17,11 +17,10 @@ current = true
 [node name="SoundPlayer" type="AudioStreamPlayer3D" parent="."]
 max_distance = 117.03
 
-[node name="BerimbauKit" parent="." instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22567, 0, 0.131646)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.988065, -0.154038, 0, 0.154038, 0.988065, 0, 0, 0, 1, -0.357379, 0.59102, -4.49169)
+
+[node name="BerimbauKit" parent="." instance=ExtResource("2_sugp2")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
