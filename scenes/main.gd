@@ -2,14 +2,12 @@ extends Node3D
 
 # --- Constantes ---
 var sons_viola_solto = [
-	preload("res://assets/audio/berimbau-viola/solto/viola_solto_1.ogg"),
 	preload("res://assets/audio/berimbau-viola/solto/viola_solto_2.ogg"),
 	preload("res://assets/audio/berimbau-viola/solto/viola_solto_3.ogg"),
 	preload("res://assets/audio/berimbau-viola/solto/viola_solto_4.ogg"),
 	preload("res://assets/audio/berimbau-viola/solto/viola_solto_5.ogg")
 ]
 var sons_viola_chiado = [
-	#preload("res://assets/audio/berimbau-viola/chiado/viola_chiado_1.ogg"),
 	preload("res://assets/audio/berimbau-viola/chiado/viola_chiado_2.ogg"),
 	preload("res://assets/audio/berimbau-viola/chiado/viola_chiado_3.ogg"),
 	preload("res://assets/audio/berimbau-viola/chiado/viola_chiado_4.ogg")
@@ -75,26 +73,46 @@ func _process(_delta):
 		
 func tocar_som_berimbau(id_estado):
 	var lista_de_sons = []
+	var instrumento = GameData.berimbau_atual
 	
-	# Define qual lista usar baseada no estado
-	if id_estado == 3:
-		lista_de_sons = sons_viola_preso
-	elif id_estado == 2:
-		lista_de_sons = sons_viola_chiado
-	else:
-		lista_de_sons = sons_viola_solto
-	
-	# Escolhe um som aleatório da lista e toca
+	match instrumento:
+		GameData.BERIMBAU_VIOLA:
+			lista_de_sons = selecionar_lista_por_tipo(id_estado, sons_viola_solto, sons_viola_chiado, sons_viola_preso)
+			
+		GameData.BERIMBAU_MEDIO:
+			lista_de_sons = selecionar_lista_por_tipo(id_estado, sons_viola_solto, sons_viola_chiado, sons_viola_preso)
+			print("Alerta: Sons do Médio não carregados. Usando Viola.")
+			
+		GameData.BERIMBAU_GUNGA:
+			lista_de_sons = selecionar_lista_por_tipo(id_estado, sons_viola_solto, sons_viola_chiado, sons_viola_preso)
+			print("Alerta: Sons do Gunga não carregados. Usando Viola.")
+
 	if lista_de_sons.size() > 0:
 		sound_player.stream = lista_de_sons.pick_random()
+		sound_player.pitch_scale = randf_range(0.96, 1.04)
 		sound_player.play()
+	
+func selecionar_lista_por_tipo(id, lista_solto, lista_chiado, lista_preso):
+	if id == 3:
+		return lista_preso
+	elif id == 2:
+		return lista_chiado
+	else:
+		return lista_solto
 	
 # Função Timer que gera notas, qualifica e posiciona
 func _on_timer_timeout():
 	total_notas_geradas += 1
+	
+	var array_do_toque = GameData.get_toque_atual_array()
+	
+	if toque_index >= array_do_toque.size():
+		toque_index = 0
+		
+	var tipo_da_nota = array_do_toque[toque_index]
+	toque_index = (toque_index + 1) % array_do_toque.size()
+	
 	var nova_nota = NOTA_SCENE.instantiate()
-	var tipo_da_nota = toque_atual_array[toque_index]
-	toque_index = (toque_index + 1) % toque_atual_array.size()
 	
 	if tipo_da_nota == 1:
 		nova_nota.position = pista_solto.position

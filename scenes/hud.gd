@@ -1,5 +1,7 @@
 extends Control
 
+const MENU_OPCOES_SCENE = preload("res://scenes/menu_opcoes.tscn")
+
 @onready var acertos_label = $AcertosLabel
 @onready var erros_label = $ErrosLabel
 @onready var porcentagem_label = $PorcentagemLabel
@@ -15,3 +17,8 @@ func atualizar_hud(acertos, erros):
 		porcentagem = (float(acertos) / total_resolvido) * 100
 	
 	porcentagem_label.text = "Precisão: " + ("%.f" % porcentagem) + "%"
+
+func _on_config_pressed() -> void:
+	var menu = MENU_OPCOES_SCENE.instantiate()
+	add_child(menu)
+	get_tree().paused = true

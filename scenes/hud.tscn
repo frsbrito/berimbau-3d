@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdc5vdt0pw1ve"]
+[gd_scene load_steps=3 format=3 uid="uid://cdc5vdt0pw1ve"]
 
 [ext_resource type="Script" uid="uid://bcddj8kr6536n" path="res://scenes/hud.gd" id="1_ahhtf"]
+[ext_resource type="Texture2D" uid="uid://cyk4d832w3uap" path="res://icon.png" id="2_oo0fn"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -44,3 +45,13 @@ offset_right = 1181.0
 offset_bottom = 671.0
 grow_horizontal = 0
 text = "Precisão: 100%"
+
+[node name="Config" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1155.0
+offset_top = 31.0
+offset_right = 1253.0
+offset_bottom = 129.0
+icon = ExtResource("2_oo0fn")
+
+[connection signal="pressed" from="Config" to="." method="_on_config_pressed"]
