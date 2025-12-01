@@ -17,6 +17,37 @@ var sons_viola_preso = [
 	preload("res://assets/audio/berimbau-viola/preso/viola_preso_2.ogg"),
 	preload("res://assets/audio/berimbau-viola/preso/viola_preso_3.ogg")
 ]
+var sons_medio_solto = [
+	preload("res://assets/audio/berimbau-medio/solto/medio_solto_1.ogg"),
+	preload("res://assets/audio/berimbau-medio/solto/medio_solto_2.ogg"),
+]
+var sons_medio_chiado = [
+	preload("res://assets/audio/berimbau-medio/chiado/medio_chiado_1.ogg"),
+	preload("res://assets/audio/berimbau-medio/chiado/medio_chiado_2.ogg"),
+	preload("res://assets/audio/berimbau-medio/chiado/medio_chiado_3.ogg"),
+	preload("res://assets/audio/berimbau-medio/chiado/medio_chiado_4.ogg"),
+	preload("res://assets/audio/berimbau-medio/chiado/medio_chiado_5.ogg")
+]
+var sons_medio_preso = [
+	preload("res://assets/audio/berimbau-medio/preso/medio_preso_1.ogg"),
+	preload("res://assets/audio/berimbau-medio/preso/medio_preso_2.ogg"),
+	preload("res://assets/audio/berimbau-medio/preso/medio_preso_3.ogg"),
+	preload("res://assets/audio/berimbau-medio/preso/medio_preso_4.ogg"),
+	preload("res://assets/audio/berimbau-medio/preso/medio_preso_5.ogg")
+]
+var sons_gunga_solto = [
+	preload("res://assets/audio/berimbau-gunga/solto/gunga_solto_1.ogg")
+]
+var sons_gunga_chiado = [
+	preload("res://assets/audio/berimbau-gunga/chiado/gunga_chiado_1.ogg"),
+	preload("res://assets/audio/berimbau-gunga/chiado/gunga_chiado_2.ogg"),
+	preload("res://assets/audio/berimbau-gunga/chiado/gunga_chiado_3.ogg"),
+	preload("res://assets/audio/berimbau-gunga/chiado/gunga_chiado_4.ogg")
+]
+var sons_gunga_preso = [
+	preload("res://assets/audio/berimbau-gunga/preso/gunga_preso_1.ogg"),
+	preload("res://assets/audio/berimbau-gunga/preso/gunga_preso_2.ogg"),
+]
 const NOTA_SCENE = preload("res://scenes/nota.tscn")
 
 # --- Referências de Nós (@onready) ---
@@ -27,6 +58,7 @@ const NOTA_SCENE = preload("res://scenes/nota.tscn")
 @onready var pista_solto = $CanvasLayer/Pistas/Pista_Solto
 @onready var pista_chiado = $CanvasLayer/Pistas/Pista_Chiado
 @onready var pista_preso = $CanvasLayer/Pistas/Pista_Preso
+@onready var timer_gerador = $Timer
 
 # --- Variáveis do Jogo ---
 var toque_index = 0
@@ -71,6 +103,10 @@ func _process(_delta):
 		# Lógica do som a tocar de acordo com input
 		tocar_som_berimbau(estado_atual_id)
 		
+	# Lógica da seleção de velocidade das notas
+	if timer_gerador.wait_time != GameData.velocidade_atual:
+		timer_gerador.wait_time = GameData.velocidade_atual
+		
 func tocar_som_berimbau(id_estado):
 	var lista_de_sons = []
 	var instrumento = GameData.berimbau_atual
@@ -80,16 +116,14 @@ func tocar_som_berimbau(id_estado):
 			lista_de_sons = selecionar_lista_por_tipo(id_estado, sons_viola_solto, sons_viola_chiado, sons_viola_preso)
 			
 		GameData.BERIMBAU_MEDIO:
-			lista_de_sons = selecionar_lista_por_tipo(id_estado, sons_viola_solto, sons_viola_chiado, sons_viola_preso)
-			print("Alerta: Sons do Médio não carregados. Usando Viola.")
+			lista_de_sons = selecionar_lista_por_tipo(id_estado, sons_medio_solto, sons_medio_chiado, sons_medio_preso)
 			
 		GameData.BERIMBAU_GUNGA:
-			lista_de_sons = selecionar_lista_por_tipo(id_estado, sons_viola_solto, sons_viola_chiado, sons_viola_preso)
-			print("Alerta: Sons do Gunga não carregados. Usando Viola.")
+			lista_de_sons = selecionar_lista_por_tipo(id_estado, sons_gunga_solto, sons_gunga_chiado, sons_gunga_preso)
 
 	if lista_de_sons.size() > 0:
 		sound_player.stream = lista_de_sons.pick_random()
-		sound_player.pitch_scale = randf_range(0.96, 1.04)
+		sound_player.pitch_scale = randf_range(0.99, 1.01)
 		sound_player.play()
 	
 func selecionar_lista_por_tipo(id, lista_solto, lista_chiado, lista_preso):

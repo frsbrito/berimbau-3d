@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://kcuyxwdqqv23"]
+[gd_scene load_steps=23 format=3 uid="uid://kcuyxwdqqv23"]
 
 [ext_resource type="Script" uid="uid://b3nr4rsronsvx" path="res://scenes/menu_opcoes.gd" id="1_c3hxg"]
 [ext_resource type="Texture2D" uid="uid://ot5va5m827mv" path="res://assets/sprites/nota_preso.png" id="2_m0ff5"]
@@ -72,6 +72,27 @@ border_color = Color(0.78431374, 0.6, 0, 1)
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_o442c"]
 resource_name = "Toques"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o442c"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78431374, 0.6, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l85cf"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78431374, 0.6, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jipr1"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78431374, 0.6, 0, 1)
 
 [node name="MenuOpcoes" type="Control"]
 process_mode = 3
@@ -164,6 +185,33 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_o442c")
 text = "Toque de São Bento Pequeno"
 
+[node name="Label_Velocidade" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Selecione a Velocidade:"
+horizontal_alignment = 1
+
+[node name="HBoxContainer_Velocidade" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="BtnLento" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Velocidade"]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o442c")
+toggle_mode = true
+text = "Lento"
+
+[node name="BtnEquilibrado" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Velocidade"]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l85cf")
+toggle_mode = true
+text = "Equilibrado"
+
+[node name="BtnRapido" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Velocidade"]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jipr1")
+toggle_mode = true
+text = "Rápido"
+
 [node name="BtnFechar" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Fechar
@@ -175,4 +223,7 @@ text = "Fechar
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/VBoxContainer_Toques/BtnAngola" to="." method="_on_btn_angola_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/VBoxContainer_Toques/BtnSBGrande" to="." method="_on_btn_sb_grande_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/VBoxContainer_Toques/BtnSBPequeno" to="." method="_on_btn_sb_pequeno_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Velocidade/BtnLento" to="." method="_on_btn_lento_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Velocidade/BtnEquilibrado" to="." method="_on_btn_equilibrado_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Velocidade/BtnRapido" to="." method="_on_btn_rapido_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/BtnFechar" to="." method="_on_btn_fechar_pressed"]

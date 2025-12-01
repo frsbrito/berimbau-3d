@@ -9,6 +9,9 @@ const TIPO_SOLTO = 1
 const TIPO_CHIADO = 2
 const TIPO_PRESO = 3
 
+# --- Configuração de Velocidade (Intervalo entre notas) ---
+var velocidade_atual = 1.0
+
 # --- Configurações Selecionadas pelo Jogador ---
 var berimbau_atual = BERIMBAU_VIOLA
 var toque_nome_atual = "Angola"
