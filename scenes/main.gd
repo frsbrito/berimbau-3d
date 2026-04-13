@@ -1,5 +1,9 @@
 extends Node3D
 
+signal partida_encerrada(acertos: int, erros: int, total: int)
+
+const LIMITE_NOTAS = 5
+
 # --- Constantes ---
 var sons_viola_solto = [
 	preload("res://assets/audio/berimbau-viola/solto/viola_solto_2.ogg"),
@@ -66,10 +70,13 @@ var notas_na_zona = []
 var total_acertos = 0
 var total_erros = 0
 var total_notas_geradas = 0
+var notas_ativas = 0
+var aguardando_fim = false
 var toque_atual_array = []
 
 func _ready():
 	toque_atual_array = GameData.get_toque_atual_array()
+	partida_encerrada.connect(hud._on_partida_encerrada)
 
 # --- Funções do Jogo ---
 func _process(_delta):
@@ -95,8 +102,10 @@ func _process(_delta):
 		if nota_acertada != null:
 			print("ACERTOU! (Tipo: ", nota_acertada.tipo, ")")
 			total_acertos += 1
-			notas_na_zona.erase(nota_acertada) 
+			notas_ativas -= 1
+			notas_na_zona.erase(nota_acertada)
 			nota_acertada.queue_free()
+			_verificar_fim_de_partida()
 		else:
 			print("ERROU!")
 		
@@ -137,7 +146,13 @@ func selecionar_lista_por_tipo(id, lista_solto, lista_chiado, lista_preso):
 # Função Timer que gera notas, qualifica e posiciona
 func _on_timer_timeout():
 	total_notas_geradas += 1
-	
+
+	if total_notas_geradas > LIMITE_NOTAS:
+		timer_gerador.stop()
+		aguardando_fim = true
+		_verificar_fim_de_partida()
+		return
+
 	var array_do_toque = GameData.get_toque_atual_array()
 	
 	if toque_index >= array_do_toque.size():
@@ -146,6 +161,7 @@ func _on_timer_timeout():
 	var tipo_da_nota = array_do_toque[toque_index]
 	toque_index = (toque_index + 1) % array_do_toque.size()
 	
+	notas_ativas += 1
 	var nova_nota = NOTA_SCENE.instantiate()
 	
 	if tipo_da_nota == 1:
@@ -161,8 +177,14 @@ func _on_timer_timeout():
 func _on_zona_de_acerto_area_entered(area: Area2D) -> void:
 	notas_na_zona.append(area)
 
+func _verificar_fim_de_partida() -> void:
+	if aguardando_fim and notas_ativas == 0:
+		partida_encerrada.emit(total_acertos, total_erros, LIMITE_NOTAS)
+
 func _on_zona_de_acerto_area_exited(area: Area2D) -> void:
 	if notas_na_zona.has(area):
 		total_erros += 1
+		notas_ativas -= 1
 		notas_na_zona.erase(area)
 		area.queue_free()
+		_verificar_fim_de_partida()
