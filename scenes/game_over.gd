@@ -1,10 +1,17 @@
 extends Control
 
+func _ready() -> void:
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	btn_jogar_novamente.pressed.connect(_on_btn_jogar_novamente_pressed)
+	btn_menu.pressed.connect(_on_btn_menu_pressed)
+
 @onready var pontuacao_label = $Panel/MarginContainer/VBoxContainer/PontuacaoLabel
 @onready var acertos_label = $Panel/MarginContainer/VBoxContainer/AcertosLabel
 @onready var erros_label = $Panel/MarginContainer/VBoxContainer/ErrosLabel
 @onready var precisao_label = $Panel/MarginContainer/VBoxContainer/PrecisaoLabel
 @onready var mensagem_label = $Panel/MarginContainer/VBoxContainer/MensagemLabel
+@onready var btn_jogar_novamente = $Panel/MarginContainer/VBoxContainer/VBoxContainer/BtnJogarNovamente
+@onready var btn_menu = $Panel/MarginContainer/VBoxContainer/VBoxContainer/BtnMenu
 
 func inicializar(acertos: int, erros: int, total: int) -> void:
 	var pontuacao = 0
@@ -34,10 +41,7 @@ func _mensagem_por_pontuacao(pontuacao: int) -> String:
 		return "Não desista, tente novamente!"
 
 func _on_btn_jogar_novamente_pressed() -> void:
-	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 func _on_btn_menu_pressed() -> void:
-	get_tree().paused = false
-	# Substitua pelo caminho correto da sua cena de menu principal, se houver
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://scenes/menu_principal.tscn")

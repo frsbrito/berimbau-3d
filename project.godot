@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Berimbau_3D"
-run/main_scene="uid://ttefn00ejmbp"
+run/main_scene="uid://b6ixh1afmwu5"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="uid://cyk4d832w3uap"
 
@@ -32,6 +32,10 @@ GameData="*res://scripts/GameData.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
+
+[gui]
+
+theme/custom="uid://drjmxq66qsobd"
 
 [input]
 

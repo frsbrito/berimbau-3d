@@ -2,7 +2,7 @@ extends Node3D
 
 signal partida_encerrada(acertos: int, erros: int, total: int)
 
-const LIMITE_NOTAS = 5
+const LIMITE_NOTAS = 20
 
 # --- Constantes ---
 var sons_viola_solto = [
@@ -72,10 +72,7 @@ var total_erros = 0
 var total_notas_geradas = 0
 var notas_ativas = 0
 var aguardando_fim = false
-var toque_atual_array = []
-
 func _ready():
-	toque_atual_array = GameData.get_toque_atual_array()
 	partida_encerrada.connect(hud._on_partida_encerrada)
 
 # --- Funções do Jogo ---
@@ -87,9 +84,6 @@ func _process(_delta):
 	elif Input.is_action_pressed("dobrao_chiado"):
 		estado_atual_id = 2
 	
-	# Chama atualização da interface para atualizar acertos e erros
-	hud.atualizar_hud(total_acertos, total_erros)
-	
 	# Lógica do toque da baqueta
 	if Input.is_action_just_pressed("toque_baqueta"):
 		var nota_acertada = null
@@ -100,14 +94,12 @@ func _process(_delta):
 		
 		# Lógica de acerto e erro
 		if nota_acertada != null:
-			print("ACERTOU! (Tipo: ", nota_acertada.tipo, ")")
 			total_acertos += 1
 			notas_ativas -= 1
 			notas_na_zona.erase(nota_acertada)
 			nota_acertada.queue_free()
+			hud.atualizar_hud(total_acertos, total_erros)
 			_verificar_fim_de_partida()
-		else:
-			print("ERROU!")
 		
 		# Lógica do som a tocar de acordo com input
 		tocar_som_berimbau(estado_atual_id)
@@ -179,6 +171,7 @@ func _on_zona_de_acerto_area_entered(area: Area2D) -> void:
 
 func _verificar_fim_de_partida() -> void:
 	if aguardando_fim and notas_ativas == 0:
+		set_process(false)
 		partida_encerrada.emit(total_acertos, total_erros, LIMITE_NOTAS)
 
 func _on_zona_de_acerto_area_exited(area: Area2D) -> void:
@@ -187,4 +180,5 @@ func _on_zona_de_acerto_area_exited(area: Area2D) -> void:
 		notas_ativas -= 1
 		notas_na_zona.erase(area)
 		area.queue_free()
+		hud.atualizar_hud(total_acertos, total_erros)
 		_verificar_fim_de_partida()

@@ -21,11 +21,10 @@ func atualizar_hud(acertos, erros):
 
 func _on_partida_encerrada(acertos: int, erros: int, total: int) -> void:
 	var game_over = load(GAME_OVER_SCENE_PATH).instantiate()
-	add_child(game_over)
+	get_parent().add_child(game_over)
 	game_over.inicializar(acertos, erros, total)
-	get_tree().paused = true
 
 func _on_config_pressed() -> void:
 	var menu = MENU_OPCOES_SCENE.instantiate()
-	add_child(menu)
+	get_parent().add_child(menu)
 	get_tree().paused = true

@@ -1,62 +1,71 @@
-[gd_scene load_steps=5 format=3 uid="uid://ttefn00ejmbp"]
+[gd_scene format=3 uid="uid://ttefn00ejmbp"]
 
 [ext_resource type="Script" uid="uid://nbg7ive7pwbf" path="res://scenes/main.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://bd682x241b3wx" path="res://scenes/berimbau_em_cena.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cdc5vdt0pw1ve" path="res://scenes/hud.tscn" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://dryrvk7fqi6vn" path="res://scenes/zona_acerto_visual.gd" id="4_jyhfs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wfyh"]
 size = Vector2(102.7, 25.2)
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=2000144735]
 script = ExtResource("1_o5qli")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.491193, 0, 0.871051, 0, 1, 0, -0.871051, 0, -0.491193, 12.021, 2.526, -6.173)
-current = true
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2124184955]
 
-[node name="SoundPlayer" type="AudioStreamPlayer3D" parent="."]
-max_distance = 117.03
+[node name="Fundo_Canvas" type="ColorRect" parent="CanvasLayer" unique_id=47765077]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2509804, 0.16470589, 0.047058824, 1)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.988065, -0.154038, 0, 0.154038, 0.988065, 0, 0, 0, 1, -0.357379, 0.59102, -4.49169)
-
-[node name="BerimbauKit" parent="." instance=ExtResource("2_sugp2")]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="DebugLabel" type="Label" parent="CanvasLayer"]
+[node name="DebugLabel" type="Label" parent="CanvasLayer" unique_id=1330033322]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Estado:"
+metadata/_edit_use_anchors_ = true
 
-[node name="Pistas" type="Node2D" parent="CanvasLayer"]
+[node name="Pistas" type="Node2D" parent="CanvasLayer" unique_id=2053490173]
 
-[node name="Pista_Solto" type="Marker2D" parent="CanvasLayer/Pistas"]
+[node name="Pista_Solto" type="Marker2D" parent="CanvasLayer/Pistas" unique_id=723864249]
 position = Vector2(200, 100)
 
-[node name="Pista_Chiado" type="Marker2D" parent="CanvasLayer/Pistas"]
+[node name="Pista_Chiado" type="Marker2D" parent="CanvasLayer/Pistas" unique_id=930855669]
 position = Vector2(400, 100)
 
-[node name="Pista_Preso" type="Marker2D" parent="CanvasLayer/Pistas"]
+[node name="Pista_Preso" type="Marker2D" parent="CanvasLayer/Pistas" unique_id=1387597554]
 position = Vector2(600, 100)
 
-[node name="ZonaDeAcerto" type="Area2D" parent="CanvasLayer"]
+[node name="ZonaDeAcerto" type="Area2D" parent="CanvasLayer" unique_id=617082504]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/ZonaDeAcerto"]
+[node name="ZonaAcertoVisual" type="Node2D" parent="CanvasLayer/ZonaDeAcerto" unique_id=1974027074]
+position = Vector2(0, 652)
+script = ExtResource("4_jyhfs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/ZonaDeAcerto" unique_id=1663320742]
 position = Vector2(398, 652)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_0wfyh")
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ZonaDeAcerto"]
-offset_left = 141.0
-offset_top = 589.0
-offset_right = 655.0
-offset_bottom = 715.0
-color = Color(0.65098, 0, 0.0901961, 0.392157)
+[node name="HUD" parent="CanvasLayer" unique_id=1082401610 instance=ExtResource("3_sugp2")]
+metadata/_edit_use_anchors_ = true
 
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("3_sugp2")]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=163319482]
+transform = Transform3D(-0.491193, 0, 0.871051, 0, 1, 0, -0.871051, 0, -0.491193, 12.021, 2.526, -6.173)
+current = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="SoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1798855191]
+max_distance = 117.03
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1639073092]
+transform = Transform3D(0.988065, -0.154038, 0, 0.154038, 0.988065, 0, 0, 0, 1, -0.357379, 0.59102, -4.49169)
+
+[node name="BerimbauKit" parent="." unique_id=1860939270 instance=ExtResource("2_sugp2")]
+
+[node name="Timer" type="Timer" parent="." unique_id=961692254]
 wait_time = 0.8
 autostart = true
 
