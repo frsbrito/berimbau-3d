@@ -56,13 +56,14 @@ const NOTA_SCENE = preload("res://scenes/nota.tscn")
 
 # --- Referências de Nós (@onready) ---
 @onready var sound_player = $SoundPlayer
-#@onready var debug_label = $CanvasLayer/DebugLabel
 @onready var hud = $CanvasLayer/HUD
 @onready var pistas_container = $CanvasLayer/Pistas
 @onready var pista_solto = $CanvasLayer/Pistas/Pista_Solto
 @onready var pista_chiado = $CanvasLayer/Pistas/Pista_Chiado
 @onready var pista_preso = $CanvasLayer/Pistas/Pista_Preso
 @onready var timer_gerador = $Timer
+@onready var zona_collision = $CanvasLayer/ZonaDeAcerto/CollisionShape2D
+@onready var touch_controls_node = get_node_or_null("TouchControls")
 
 # --- Variáveis do Jogo ---
 var toque_index = 0
@@ -74,6 +75,31 @@ var notas_ativas = 0
 var aguardando_fim = false
 func _ready():
 	partida_encerrada.connect(hud._on_partida_encerrada)
+	_ajustar_layout()
+
+func _ajustar_layout():
+	var size     = get_viewport().get_visible_rect().size
+	var tc           = touch_controls_node
+	var dlr          = tc.dobrao_largura_ratio          if is_instance_valid(tc) else 0.45
+	var dar          = tc.dobrao_altura_ratio           if is_instance_valid(tc) else 0.30
+	var dme          = tc.dobrao_margem_esquerda_ratio  if is_instance_valid(tc) else 0.0
+	var offset_y     = size.y * (tc.dobrao_margem_inferior_ratio if is_instance_valid(tc) else 0.0)
+
+	var dobrao_x    = size.x * dme
+	var dobrao_w    = size.x * dlr
+	var dobrao_h    = size.y * dar
+	var zone_w      = dobrao_w / 3.0
+	var dobrao_topo = size.y * (1.0 - dar) - offset_y
+
+	# Spawns das notas alinhados às colunas do dobrão, no topo da tela
+	pista_solto.position  = Vector2(dobrao_x + zone_w * 0.5, 50.0)
+	pista_chiado.position = Vector2(dobrao_x + zone_w * 1.5, 50.0)
+	pista_preso.position  = Vector2(dobrao_x + zone_w * 2.5, 50.0)
+
+	# CollisionShape cobre toda a área do dobrão
+	zona_collision.scale    = Vector2(1, 1)
+	zona_collision.position = Vector2(dobrao_x + dobrao_w / 2.0, dobrao_topo + dobrao_h / 2.0)
+	(zona_collision.shape as RectangleShape2D).size = Vector2(dobrao_w, dobrao_h)
 
 # --- Funções do Jogo ---
 func _process(_delta):
