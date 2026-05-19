@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://nbg7ive7pwbf" path="res://scenes/main.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://bd682x241b3wx" path="res://scenes/berimbau_em_cena.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cdc5vdt0pw1ve" path="res://scenes/hud.tscn" id="3_sugp2"]
-[ext_resource type="Script" uid="uid://dryrvk7fqi6vn" path="res://scenes/zona_acerto_visual.gd" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://cunwj1i1pscbf" path="res://scenes/touch_ui.gd" id="4_tefeu"]
+[ext_resource type="Script" uid="uid://cocta272nuqrv" path="res://scenes/touch_controls.gd" id="5_tbgi4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wfyh"]
 size = Vector2(102.7, 25.2)
@@ -31,19 +32,15 @@ metadata/_edit_use_anchors_ = true
 [node name="Pistas" type="Node2D" parent="CanvasLayer" unique_id=2053490173]
 
 [node name="Pista_Solto" type="Marker2D" parent="CanvasLayer/Pistas" unique_id=723864249]
-position = Vector2(200, 100)
+position = Vector2(200, 0)
 
 [node name="Pista_Chiado" type="Marker2D" parent="CanvasLayer/Pistas" unique_id=930855669]
-position = Vector2(400, 100)
+position = Vector2(400, 0)
 
 [node name="Pista_Preso" type="Marker2D" parent="CanvasLayer/Pistas" unique_id=1387597554]
-position = Vector2(600, 100)
+position = Vector2(600, 0)
 
 [node name="ZonaDeAcerto" type="Area2D" parent="CanvasLayer" unique_id=617082504]
-
-[node name="ZonaAcertoVisual" type="Node2D" parent="CanvasLayer/ZonaDeAcerto" unique_id=1974027074]
-position = Vector2(0, 652)
-script = ExtResource("4_jyhfs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/ZonaDeAcerto" unique_id=1663320742]
 position = Vector2(398, 652)
@@ -53,6 +50,10 @@ shape = SubResource("RectangleShape2D_0wfyh")
 [node name="HUD" parent="CanvasLayer" unique_id=1082401610 instance=ExtResource("3_sugp2")]
 metadata/_edit_use_anchors_ = true
 
+[node name="TouchUI" type="Node2D" parent="CanvasLayer" unique_id=92782986 node_paths=PackedStringArray("touch_controls")]
+script = ExtResource("4_tefeu")
+touch_controls = NodePath("../../TouchControls")
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=163319482]
 transform = Transform3D(-0.491193, 0, 0.871051, 0, 1, 0, -0.871051, 0, -0.491193, 12.021, 2.526, -6.173)
 current = true
@@ -61,13 +62,17 @@ current = true
 max_distance = 117.03
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1639073092]
-transform = Transform3D(0.988065, -0.154038, 0, 0.154038, 0.988065, 0, 0, 0, 1, -0.357379, 0.59102, -4.49169)
+transform = Transform3D(-0.81063485, -0.58555204, 0, 0.58555204, -0.81063485, 0, 0, 0, 1, -4.647921, 2.8512502, 4.5081816)
 
 [node name="BerimbauKit" parent="." unique_id=1860939270 instance=ExtResource("2_sugp2")]
 
 [node name="Timer" type="Timer" parent="." unique_id=961692254]
 wait_time = 0.8
 autostart = true
+
+[node name="TouchControls" type="Node" parent="." unique_id=1034642711 node_paths=PackedStringArray("camera")]
+script = ExtResource("5_tbgi4")
+camera = NodePath("../Camera3D")
 
 [connection signal="area_entered" from="CanvasLayer/ZonaDeAcerto" to="." method="_on_zona_de_acerto_area_entered"]
 [connection signal="area_exited" from="CanvasLayer/ZonaDeAcerto" to="." method="_on_zona_de_acerto_area_exited"]
