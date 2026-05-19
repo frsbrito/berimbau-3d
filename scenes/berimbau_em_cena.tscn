@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bd682x241b3wx"]
+[gd_scene format=3 uid="uid://bd682x241b3wx"]
 
 [ext_resource type="PackedScene" uid="uid://enqj04q6cvff" path="res://assets/models/BerimbauKit.glb" id="1_fceg5"]
+[ext_resource type="Script" uid="uid://cn1n27ayrcggk" path="res://scenes/berimbau_kit.gd" id="2_pcbtt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fceg5"]
 albedo_color = Color(0.728202, 0.448721, 7.70092e-07, 1)
@@ -11,13 +12,16 @@ albedo_color = Color(0.729412, 0.447059, 0, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vtl4"]
 albedo_color = Color(0, 0.564706, 0.133333, 1)
 
-[node name="BerimbauKit" instance=ExtResource("1_fceg5")]
+[node name="BerimbauKit" unique_id=154943311 instance=ExtResource("1_fceg5")]
+script = ExtResource("2_pcbtt")
 
-[node name="Cylinder" parent="." index="0"]
+[node name="Cylinder" parent="." index="0" unique_id=1341500290]
+transform = Transform3D(-0.21628027, -0.94288826, 0.2533463, -0.2723989, -0.19090798, -0.94305503, 0.9375615, -0.27297541, -0.21555212, 0.7008627, -2.4153578, -0.3915857)
 surface_material_override/0 = SubResource("StandardMaterial3D_fceg5")
 
-[node name="Sphere_001" parent="." index="1"]
+[node name="Sphere_001" parent="." index="1" unique_id=541870592]
+transform = Transform3D(-0.08527778, -0.9963573, 0, 0.99620587, -0.08526482, 0.017434957, -0.017371446, 0.0014868143, 0.999848, 0.17477718, -2.3892415, -0.43619668)
 surface_material_override/0 = SubResource("StandardMaterial3D_pcbtt")
 
-[node name="Cube_003" parent="." index="2"]
+[node name="Cube_003" parent="." index="2" unique_id=937545941]
 surface_material_override/0 = SubResource("StandardMaterial3D_5vtl4")
