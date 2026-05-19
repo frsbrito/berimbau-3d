@@ -36,30 +36,48 @@ func _ready():
 
 func _on_btn_viola_pressed():
 	GameData.berimbau_atual = GameData.BERIMBAU_VIOLA
+	btn_medio.button_pressed = false
+	btn_gunga.button_pressed = false
 
 func _on_btn_medio_pressed():
 	GameData.berimbau_atual = GameData.BERIMBAU_MEDIO
+	btn_viola.button_pressed = false
+	btn_gunga.button_pressed = false
 
 func _on_btn_gunga_pressed():
 	GameData.berimbau_atual = GameData.BERIMBAU_GUNGA
+	btn_viola.button_pressed = false
+	btn_medio.button_pressed = false
 
 func _on_btn_angola_pressed():
 	GameData.toque_nome_atual = "Angola"
+	btn_sb_grande.button_pressed = false
+	btn_sb_pequeno.button_pressed = false
 
 func _on_btn_sb_grande_pressed():
 	GameData.toque_nome_atual = "SaoBentoGrande"
+	btn_angola.button_pressed = false
+	btn_sb_pequeno.button_pressed = false
 
 func _on_btn_sb_pequeno_pressed():
 	GameData.toque_nome_atual = "SaoBentoPequeno"
+	btn_angola.button_pressed = false
+	btn_sb_grande.button_pressed = false
 
 func _on_btn_lento_pressed():
 	GameData.velocidade_atual = 2.0
+	btn_equilibrado.button_pressed = false
+	btn_rapido.button_pressed = false
 
 func _on_btn_equilibrado_pressed():
 	GameData.velocidade_atual = 1.5
+	btn_lento.button_pressed = false
+	btn_rapido.button_pressed = false
 
 func _on_btn_rapido_pressed():
 	GameData.velocidade_atual = 1.0
+	btn_lento.button_pressed = false
+	btn_equilibrado.button_pressed = false
 
 func _on_btn_voltar_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menu_principal.tscn")
