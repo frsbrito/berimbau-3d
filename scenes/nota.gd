@@ -13,10 +13,11 @@ func _process(delta):
 	position.y += speed * delta
 
 func setup(tipo_da_nota):
-	if tipo_da_nota == 1:
-		sprite.texture = SPRITE_SOLTO
-	elif tipo_da_nota == 2:
-		sprite.texture = SPRITE_CHIADO
-	else:
-		sprite.texture = SPRITE_PRESO
+	match tipo_da_nota:
+		GameData.TIPO_SOLTO:
+			sprite.texture = SPRITE_SOLTO
+		GameData.TIPO_CHIADO:
+			sprite.texture = SPRITE_CHIADO
+		GameData.TIPO_PRESO:
+			sprite.texture = SPRITE_PRESO
 	tipo = tipo_da_nota

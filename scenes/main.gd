@@ -77,12 +77,11 @@ func _ready():
 
 # --- Funções do Jogo ---
 func _process(_delta):
-	# Identifica o estado atual (1=Solto, 2=Chiado, 3=Preso)
-	var estado_atual_id = 1
+	var estado_atual_id = GameData.TIPO_SOLTO
 	if Input.is_action_pressed("dobrao_preso"):
-		estado_atual_id = 3
+		estado_atual_id = GameData.TIPO_PRESO
 	elif Input.is_action_pressed("dobrao_chiado"):
-		estado_atual_id = 2
+		estado_atual_id = GameData.TIPO_CHIADO
 	
 	# Lógica do toque da baqueta
 	if Input.is_action_just_pressed("toque_baqueta"):
@@ -128,12 +127,13 @@ func tocar_som_berimbau(id_estado):
 		sound_player.play()
 	
 func selecionar_lista_por_tipo(id, lista_solto, lista_chiado, lista_preso):
-	if id == 3:
-		return lista_preso
-	elif id == 2:
-		return lista_chiado
-	else:
-		return lista_solto
+	match id:
+		GameData.TIPO_PRESO:
+			return lista_preso
+		GameData.TIPO_CHIADO:
+			return lista_chiado
+		_:
+			return lista_solto
 	
 # Função Timer que gera notas, qualifica e posiciona
 func _on_timer_timeout():
@@ -156,12 +156,13 @@ func _on_timer_timeout():
 	notas_ativas += 1
 	var nova_nota = NOTA_SCENE.instantiate()
 	
-	if tipo_da_nota == 1:
-		nova_nota.position = pista_solto.position
-	elif tipo_da_nota == 2:
-		nova_nota.position = pista_chiado.position
-	else:
-		nova_nota.position = pista_preso.position
+	match tipo_da_nota:
+		GameData.TIPO_SOLTO:
+			nova_nota.position = pista_solto.position
+		GameData.TIPO_CHIADO:
+			nova_nota.position = pista_chiado.position
+		GameData.TIPO_PRESO:
+			nova_nota.position = pista_preso.position
 	
 	pistas_container.add_child(nova_nota)
 	nova_nota.setup(tipo_da_nota)
