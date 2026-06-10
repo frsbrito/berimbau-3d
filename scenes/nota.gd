@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var speed = 300.0
+@export var speed = 500.0
 var tipo = 0
 
 const SPRITE_SOLTO = preload("res://assets/sprites/nota_solto.png")

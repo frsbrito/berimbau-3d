@@ -129,9 +129,6 @@ func _process(_delta):
 		# Lógica do som a tocar de acordo com input
 		tocar_som_berimbau(estado_atual_id)
 		
-	# Lógica da seleção de velocidade das notas
-	if timer_gerador.wait_time != GameData.velocidade_atual:
-		timer_gerador.wait_time = GameData.velocidade_atual
 		
 func tocar_som_berimbau(id_estado):
 	var lista_de_sons = []
@@ -176,9 +173,13 @@ func _on_timer_timeout():
 	if toque_index >= array_do_toque.size():
 		toque_index = 0
 		
-	var tipo_da_nota = array_do_toque[toque_index]
+	var nota_data    = array_do_toque[toque_index]
+	var tipo_da_nota = nota_data[0]
+	var intervalo    = nota_data[1] * GameData.velocidade_atual
 	toque_index = (toque_index + 1) % array_do_toque.size()
-	
+
+	timer_gerador.wait_time = intervalo
+
 	notas_ativas += 1
 	var nova_nota = NOTA_SCENE.instantiate()
 	
