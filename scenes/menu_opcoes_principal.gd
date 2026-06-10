@@ -65,17 +65,17 @@ func _on_btn_sb_pequeno_pressed():
 	btn_sb_grande.button_pressed = false
 
 func _on_btn_lento_pressed():
-	GameData.velocidade_atual = 2.0
+	GameData.velocidade_atual = 1.5
 	btn_equilibrado.button_pressed = false
 	btn_rapido.button_pressed = false
 
 func _on_btn_equilibrado_pressed():
-	GameData.velocidade_atual = 1.5
+	GameData.velocidade_atual = 1.0
 	btn_lento.button_pressed = false
 	btn_rapido.button_pressed = false
 
 func _on_btn_rapido_pressed():
-	GameData.velocidade_atual = 1.0
+	GameData.velocidade_atual = 0.7
 	btn_lento.button_pressed = false
 	btn_equilibrado.button_pressed = false
 
