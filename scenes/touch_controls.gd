@@ -122,8 +122,8 @@ func _on_arraste(event: InputEventScreenDrag, r: Dictionary):
 		if _camera_touch_index in _touch_positions and _pinch_touch_index in _touch_positions:
 			var dist = _touch_positions[_camera_touch_index].distance_to(_touch_positions[_pinch_touch_index])
 			if _pinch_last_distance > 0:
-			_zoom((dist - _pinch_last_distance) * zoom_sensitivity)
-			_pinch_last_distance = dist
+				_zoom((dist - _pinch_last_distance) * zoom_sensitivity)
+				_pinch_last_distance = dist
 	elif event.index == _camera_touch_index:
 		_orbitar(event.relative)
 	elif event.index == _dobrao_touch_index:
