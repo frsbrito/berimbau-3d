@@ -2,7 +2,7 @@ extends Node3D
 
 signal partida_encerrada(acertos: int, erros: int, total: int)
 
-const LIMITE_NOTAS = 20
+const LIMITE_NOTAS = 40
 
 # --- Constantes ---
 var sons_viola_solto = [
@@ -67,6 +67,7 @@ const NOTA_SCENE = preload("res://scenes/nota.tscn")
 
 # --- Variáveis do Jogo ---
 var toque_index = 0
+var ciclo_atual: Array = []
 var notas_na_zona = []
 var total_acertos = 0
 var total_erros = 0
@@ -74,6 +75,7 @@ var total_notas_geradas = 0
 var notas_ativas = 0
 var aguardando_fim = false
 func _ready():
+	ciclo_atual = GameData.get_toque_atual_array()
 	partida_encerrada.connect(hud._on_partida_encerrada)
 	_ajustar_layout()
 
@@ -168,17 +170,13 @@ func _on_timer_timeout():
 		_verificar_fim_de_partida()
 		return
 
-	var array_do_toque = GameData.get_toque_atual_array()
-	
-	if toque_index >= array_do_toque.size():
-		toque_index = 0
-		
-	var nota_data    = array_do_toque[toque_index]
+	if toque_index == 0:
+		ciclo_atual = _escolher_ciclo()
+
+	var nota_data    = ciclo_atual[toque_index]
 	var tipo_da_nota = nota_data[0]
 	var intervalo    = nota_data[1] * GameData.velocidade_atual
-	toque_index = (toque_index + 1) % array_do_toque.size()
-
-	timer_gerador.wait_time = intervalo
+	toque_index = (toque_index + 1) % ciclo_atual.size()
 
 	notas_ativas += 1
 	var nova_nota = NOTA_SCENE.instantiate()
@@ -193,6 +191,15 @@ func _on_timer_timeout():
 	
 	pistas_container.add_child(nova_nota)
 	nova_nota.setup(tipo_da_nota)
+	timer_gerador.start(intervalo)
+
+func _escolher_ciclo() -> Array:
+	var prob = GameData.get_probabilidade_repique()
+	if prob > 0.0 and randf() < prob:
+		var rep = GameData.get_repique_aleatorio()
+		if not rep.is_empty():
+			return rep
+	return GameData.get_toque_atual_array()
 
 func _on_zona_de_acerto_area_entered(area: Area2D) -> void:
 	notas_na_zona.append(area)
