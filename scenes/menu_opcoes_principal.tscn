@@ -94,6 +94,37 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.78431374, 0.6, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prq1"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78431374, 0.6, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prq2"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78431374, 0.6, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prq3"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78431374, 0.6, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prq4"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78431374, 0.6, 0, 1)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_prq"]
+resource_name = "Repique"
+
 [node name="MenuOpcoesPrincipal" type="Control" unique_id=840219342]
 layout_mode = 3
 anchors_preset = 0
@@ -216,6 +247,43 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_plpvc")
 toggle_mode = true
 text = "Rápido"
 
+[node name="Label_Repique" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=221133441]
+layout_mode = 2
+text = "Nível de Repique:"
+horizontal_alignment = 1
+
+[node name="HBoxContainer_Repique" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=221133442]
+layout_mode = 2
+alignment = 1
+
+[node name="BtnRepNenhum" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique" unique_id=221133443]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_prq1")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_prq")
+text = "Nenhum"
+
+[node name="BtnRepBaixo" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique" unique_id=221133444]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_prq2")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_prq")
+text = "Baixo"
+
+[node name="BtnRepMedio" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique" unique_id=221133445]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_prq3")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_prq")
+text = "Médio"
+
+[node name="BtnRepAlto" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique" unique_id=221133446]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_prq4")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_prq")
+text = "Alto"
+
 [node name="BtnVoltar" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=1253573149]
 layout_mode = 2
 text = "Fechar
@@ -230,4 +298,8 @@ text = "Fechar
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Velocidade/BtnLento" to="." method="_on_btn_lento_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Velocidade/BtnEquilibrado" to="." method="_on_btn_equilibrado_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Velocidade/BtnRapido" to="." method="_on_btn_rapido_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique/BtnRepNenhum" to="." method="_on_btn_rep_nenhum_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique/BtnRepBaixo" to="." method="_on_btn_rep_baixo_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique/BtnRepMedio" to="." method="_on_btn_rep_medio_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique/BtnRepAlto" to="." method="_on_btn_rep_alto_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/BtnVoltar" to="." method="_on_btn_voltar_pressed"]

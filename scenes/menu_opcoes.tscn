@@ -94,6 +94,37 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.78431374, 0.6, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rep1"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78431374, 0.6, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rep2"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78431374, 0.6, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rep3"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78431374, 0.6, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rep4"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78431374, 0.6, 0, 1)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_rep"]
+resource_name = "Repique"
+
 [node name="MenuOpcoes" type="Control" unique_id=1613838885]
 process_mode = 3
 layout_mode = 3
@@ -230,6 +261,47 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_jipr1")
 toggle_mode = true
 text = "Rápido"
 
+[node name="Label_Repique" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=111222333]
+layout_mode = 2
+text = "Nível de Repique:"
+horizontal_alignment = 1
+
+[node name="HBoxContainer_Repique" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=111222334]
+layout_mode = 2
+alignment = 1
+
+[node name="BtnRepNenhum" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique" unique_id=111222335]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rep1")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_rep")
+text = "Nenhum"
+
+[node name="BtnRepBaixo" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique" unique_id=111222336]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rep2")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_rep")
+text = "Baixo"
+
+[node name="BtnRepMedio" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique" unique_id=111222337]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rep3")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_rep")
+text = "Médio"
+
+[node name="BtnRepAlto" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique" unique_id=111222338]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rep4")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_rep")
+text = "Alto"
+
+[node name="BtnReiniciar" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=987654321]
+layout_mode = 2
+text = "Reiniciar"
+
 [node name="BtnFechar" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=1914438985]
 layout_mode = 2
 text = "Fechar
@@ -244,4 +316,9 @@ text = "Fechar
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Velocidade/BtnLento" to="." method="_on_btn_lento_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Velocidade/BtnEquilibrado" to="." method="_on_btn_equilibrado_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Velocidade/BtnRapido" to="." method="_on_btn_rapido_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique/BtnRepNenhum" to="." method="_on_btn_rep_nenhum_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique/BtnRepBaixo" to="." method="_on_btn_rep_baixo_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique/BtnRepMedio" to="." method="_on_btn_rep_medio_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique/BtnRepAlto" to="." method="_on_btn_rep_alto_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/BtnReiniciar" to="." method="_on_btn_reiniciar_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/BtnFechar" to="." method="_on_btn_fechar_pressed"]
