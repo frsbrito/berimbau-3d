@@ -24,6 +24,10 @@ func _on_partida_encerrada(acertos: int, erros: int, total: int) -> void:
 	get_parent().add_child(game_over)
 	game_over.inicializar(acertos, erros, total)
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		_on_config_pressed()
+
 func _on_config_pressed() -> void:
 	var menu = MENU_OPCOES_SCENE.instantiate()
 	get_parent().add_child(menu)
