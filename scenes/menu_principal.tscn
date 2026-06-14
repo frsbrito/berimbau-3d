@@ -28,25 +28,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -135.0
-offset_top = -96.0
-offset_right = 135.0
-offset_bottom = 97.0
+offset_left = -200.0
+offset_top = -130.0
+offset_right = 200.0
+offset_bottom = 130.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="Label_Titulo" type="Label" parent="Panel/VBoxContainer" unique_id=1313299091]
 layout_mode = 2
+theme_override_font_sizes/font_size = 36
 text = "Berimbau 3D"
 horizontal_alignment = 1
 
 [node name="BtnJogar" type="Button" parent="Panel/VBoxContainer" unique_id=673079833]
 layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(180, 44)
 text = "Jogar"
 
 [node name="BtnOpcoes" type="Button" parent="Panel/VBoxContainer" unique_id=216605372]
 layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(180, 44)
 text = "Opções"
 
 [connection signal="pressed" from="Panel/VBoxContainer/BtnJogar" to="." method="_on_btn_jogar_pressed"]
