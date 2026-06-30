@@ -2,16 +2,16 @@ extends Node2D
 
 @export var touch_controls: Node
 
-const COR_SOLTO   = Color(0.65, 0.65, 0.65, 0.35)
-const COR_CHIADO  = Color(0.20, 0.55, 0.90, 0.40)
-const COR_PRESO   = Color(0.85, 0.25, 0.15, 0.40)
-const COR_BAQUETA = Color(0.90, 0.72, 0.10, 0.40)
-const COR_BAQUETA_ATIVO = Color(1.00, 0.88, 0.20, 0.75)
-const COR_BORDA   = Color(1.00, 1.00, 1.00, 0.20)
-const COR_TEXTO   = Color(1.00, 1.00, 1.00, 0.85)
+const COR_SOLTO   = Color(0.55, 0.55, 0.55, 0.55)
+const COR_CHIADO  = Color(0.20, 0.55, 0.90, 0.60)
+const COR_PRESO   = Color(0.85, 0.25, 0.15, 0.60)
+const COR_BAQUETA = Color(0.90, 0.72, 0.10, 0.55)
+const COR_BAQUETA_ATIVO = Color(1.00, 0.88, 0.20, 0.90)
+const COR_BORDA   = Color(1.00, 1.00, 1.00, 0.45)
+const COR_TEXTO   = Color(1.00, 1.00, 1.00, 1.00)
 const COR_DOBRAO  = Color(0.95, 0.82, 0.30, 1.00)
 
-const FONT_SIZE = 20
+const FONT_SIZE = 22
 
 var _dobrao_pos: Vector2 = Vector2.ZERO
 var _inicializado: bool = false
@@ -91,7 +91,7 @@ func _desenhar_dobrao(rect: Rect2):
 		if zona.ativo:
 			cor = Color(cor.r + 0.15, cor.g + 0.15, cor.b + 0.15, minf(cor.a + 0.25, 1.0))
 		draw_rect(zone_rect, cor)
-		draw_rect(zone_rect, COR_BORDA, false, 1.5)
+		draw_rect(zone_rect, COR_BORDA, false, 2.5)
 
 		var font = ThemeDB.fallback_font
 		var label_pos = Vector2(zone_rect.position.x, zone_rect.position.y + FONT_SIZE + 6)
@@ -109,9 +109,17 @@ func _desenhar_baqueta(rect: Rect2):
 	if _baqueta_ativo:
 		raio *= 1.08
 
-	draw_circle(center, raio, cor)
-	draw_arc(center, raio, 0, TAU, 48, COR_BORDA, 2.0)
+	# Glow externo quando ativo
+	if _baqueta_ativo:
+		draw_arc(center, raio + 10, 0, TAU, 48, Color(1.0, 0.88, 0.20, 0.25), 8.0)
+
+	# Círculo interno mais escuro para dar profundidade
+	draw_circle(center, raio, Color(cor.r * 0.5, cor.g * 0.5, cor.b * 0.5, cor.a))
+	draw_circle(center, raio * 0.88, cor)
+
+	# Bordas
+	draw_arc(center, raio, 0, TAU, 48, COR_BORDA, 3.0)
+	draw_arc(center, raio * 0.88, 0, TAU, 48, Color(1.0, 1.0, 1.0, 0.12), 1.5)
 
 	var font = ThemeDB.fallback_font
-	var label_pos = Vector2(rect.position.x, center.y - FONT_SIZE / 2.0 + 4)
-	draw_string(font, label_pos, "Tocar", HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, FONT_SIZE, COR_TEXTO)
+	draw_string(font, Vector2(rect.position.x, center.y + FONT_SIZE * 0.45), "TOCAR", HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, FONT_SIZE + 4, COR_TEXTO)
