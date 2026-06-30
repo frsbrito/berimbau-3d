@@ -20,3 +20,12 @@ mono_crash.*.json
 # System files
 .DS_Store
 Thumbs.db
+
+# Builds
+builds/
+*.apk
+*.aab
+
+# Keystores
+*.keystore
+*.jks
