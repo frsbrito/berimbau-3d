@@ -1,6 +1,6 @@
 extends Control
 
-const MENU_OPCOES_SCENE = preload("res://scenes/menu_opcoes.tscn")
+const MENU_OPCOES_SCENE = preload("res://scenes/menu_opcoes_principal.tscn")
 const GAME_OVER_SCENE_PATH = "res://scenes/game_over.tscn"
 
 @onready var acertos_label = $AcertosLabel
@@ -30,5 +30,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_config_pressed() -> void:
 	var menu = MENU_OPCOES_SCENE.instantiate()
+	menu.modo_jogo = true
 	get_parent().add_child(menu)
 	get_tree().paused = true

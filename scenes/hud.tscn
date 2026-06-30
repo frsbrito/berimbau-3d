@@ -15,11 +15,15 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1131.0
-offset_top = 617.0
-offset_right = 1208.0
-offset_bottom = 640.0
+offset_left = 1100.0
+offset_top = 8.0
+offset_right = 1232.0
+offset_bottom = 32.0
 grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.98, 0.85, 0.35, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
 text = "Acertos: 0"
 
 [node name="ErrosLabel" type="Label" parent="."]
@@ -27,11 +31,15 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1037.0
-offset_top = 617.0
-offset_right = 1096.0
-offset_bottom = 640.0
+offset_left = 1100.0
+offset_top = 34.0
+offset_right = 1232.0
+offset_bottom = 58.0
 grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.98, 0.85, 0.35, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
 text = "Erros: 0"
 
 [node name="PorcentagemLabel" type="Label" parent="."]
@@ -39,19 +47,27 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1066.0
-offset_top = 648.0
-offset_right = 1181.0
-offset_bottom = 671.0
+offset_left = 1100.0
+offset_top = 60.0
+offset_right = 1232.0
+offset_bottom = 84.0
 grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.98, 0.85, 0.35, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
 text = "Precisão: 100%"
 
 [node name="Config" type="Button" parent="."]
-layout_mode = 0
-offset_left = 1155.0
-offset_top = 31.0
-offset_right = 1253.0
-offset_bottom = 129.0
-icon = ExtResource("2_oo0fn")
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1130.0
+offset_top = 90.0
+offset_right = 1232.0
+offset_bottom = 122.0
+grow_horizontal = 0
+text = "Opções"
 
 [connection signal="pressed" from="Config" to="." method="_on_config_pressed"]
