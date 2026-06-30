@@ -64,6 +64,10 @@ const NOTA_SCENE = preload("res://scenes/nota.tscn")
 @onready var timer_gerador = $Timer
 @onready var zona_collision = $CanvasLayer/ZonaDeAcerto/CollisionShape2D
 @onready var touch_controls_node = get_node_or_null("TouchControls")
+@onready var lane_solto_visual  = $CanvasLayer/Lane_Solto
+@onready var lane_chiado_visual = $CanvasLayer/Lane_Chiado
+@onready var lane_preso_visual  = $CanvasLayer/Lane_Preso
+@onready var hit_zone_visual    = $CanvasLayer/HitZone_Visual
 
 # --- Variáveis do Jogo ---
 var toque_index = 0
@@ -94,14 +98,24 @@ func _ajustar_layout():
 	var dobrao_topo = size.y * (1.0 - dar) - offset_y
 
 	# Spawns das notas alinhados às colunas do dobrão, no topo da tela
-	pista_solto.position  = Vector2(dobrao_x + zone_w * 0.5, 50.0)
-	pista_chiado.position = Vector2(dobrao_x + zone_w * 1.5, 50.0)
-	pista_preso.position  = Vector2(dobrao_x + zone_w * 2.5, 50.0)
+	pista_solto.position  = Vector2(dobrao_x + zone_w * 0.5, -50.0)
+	pista_chiado.position = Vector2(dobrao_x + zone_w * 1.5, -50.0)
+	pista_preso.position  = Vector2(dobrao_x + zone_w * 2.5, -50.0)
 
 	# CollisionShape cobre toda a área do dobrão
 	zona_collision.scale    = Vector2(1, 1)
 	zona_collision.position = Vector2(dobrao_x + dobrao_w / 2.0, dobrao_topo + dobrao_h / 2.0)
 	(zona_collision.shape as RectangleShape2D).size = Vector2(dobrao_w, dobrao_h)
+
+	# Trilhas visuais
+	lane_solto_visual.position  = Vector2(dobrao_x, 0)
+	lane_solto_visual.size      = Vector2(zone_w, dobrao_topo)
+	lane_chiado_visual.position = Vector2(dobrao_x + zone_w, 0)
+	lane_chiado_visual.size     = Vector2(zone_w, dobrao_topo)
+	lane_preso_visual.position  = Vector2(dobrao_x + zone_w * 2, 0)
+	lane_preso_visual.size      = Vector2(zone_w, dobrao_topo)
+	hit_zone_visual.position    = Vector2(dobrao_x, dobrao_topo - 3)
+	hit_zone_visual.size        = Vector2(dobrao_w, 5)
 
 # --- Funções do Jogo ---
 func _process(_delta):
@@ -214,6 +228,5 @@ func _on_zona_de_acerto_area_exited(area: Area2D) -> void:
 		total_erros += 1
 		notas_ativas -= 1
 		notas_na_zona.erase(area)
-		area.queue_free()
 		hud.atualizar_hud(total_acertos, total_erros)
 		_verificar_fim_de_partida()

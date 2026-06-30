@@ -15,13 +15,36 @@ script = ExtResource("1_o5qli")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2124184955]
 
 [node name="Fundo_Canvas" type="ColorRect" parent="CanvasLayer" unique_id=47765077]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.2509804, 0.16470589, 0.047058824, 1)
+color = Color(0.08, 0.05, 0.01, 0.55)
+
+[node name="Lane_Solto" type="ColorRect" parent="CanvasLayer" unique_id=300000001]
+layout_mode = 0
+offset_right = 1.0
+offset_bottom = 1.0
+color = Color(0.55, 0.55, 0.55, 0.15)
+
+[node name="Lane_Chiado" type="ColorRect" parent="CanvasLayer" unique_id=300000002]
+layout_mode = 0
+offset_right = 1.0
+offset_bottom = 1.0
+color = Color(0.20, 0.55, 0.90, 0.18)
+
+[node name="Lane_Preso" type="ColorRect" parent="CanvasLayer" unique_id=300000003]
+layout_mode = 0
+offset_right = 1.0
+offset_bottom = 1.0
+color = Color(0.85, 0.25, 0.15, 0.18)
+
+[node name="HitZone_Visual" type="ColorRect" parent="CanvasLayer" unique_id=300000004]
+layout_mode = 0
+offset_right = 1.0
+offset_bottom = 1.0
+color = Color(0.98, 0.85, 0.35, 0.85)
 
 [node name="DebugLabel" type="Label" parent="CanvasLayer" unique_id=1330033322]
 offset_right = 40.0
