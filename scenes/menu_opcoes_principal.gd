@@ -1,23 +1,31 @@
 extends Control
 
-@onready var btn_viola = $Panel/MarginContainer/VBoxContainer/HBoxContainer_Berimbaus/BtnViola
-@onready var btn_medio = $Panel/MarginContainer/VBoxContainer/HBoxContainer_Berimbaus/BtnMedio
-@onready var btn_gunga = $Panel/MarginContainer/VBoxContainer/HBoxContainer_Berimbaus/BtnGunga
+var modo_jogo: bool = false
 
-@onready var btn_angola = $Panel/MarginContainer/VBoxContainer/VBoxContainer_Toques/BtnAngola
-@onready var btn_sb_grande = $Panel/MarginContainer/VBoxContainer/VBoxContainer_Toques/BtnSBGrande
-@onready var btn_sb_pequeno = $Panel/MarginContainer/VBoxContainer/VBoxContainer_Toques/BtnSBPequeno
+@onready var btn_voltar      = %BtnVoltar
+@onready var btn_tela_inicial = %BtnTelaInicial
+@onready var btn_viola = %BtnViola
+@onready var btn_medio = %BtnMedio
+@onready var btn_gunga = %BtnGunga
 
-@onready var btn_lento = $Panel/MarginContainer/VBoxContainer/HBoxContainer_Velocidade/BtnLento
-@onready var btn_equilibrado = $Panel/MarginContainer/VBoxContainer/HBoxContainer_Velocidade/BtnEquilibrado
-@onready var btn_rapido = $Panel/MarginContainer/VBoxContainer/HBoxContainer_Velocidade/BtnRapido
+@onready var btn_angola = %BtnAngola
+@onready var btn_sb_grande = %BtnSBGrande
+@onready var btn_sb_pequeno = %BtnSBPequeno
 
-@onready var btn_rep_nenhum = $Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique/BtnRepNenhum
-@onready var btn_rep_baixo  = $Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique/BtnRepBaixo
-@onready var btn_rep_medio  = $Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique/BtnRepMedio
-@onready var btn_rep_alto   = $Panel/MarginContainer/VBoxContainer/HBoxContainer_Repique/BtnRepAlto
+@onready var btn_lento = %BtnLento
+@onready var btn_equilibrado = %BtnEquilibrado
+@onready var btn_rapido = %BtnRapido
+
+@onready var btn_rep_nenhum = %BtnRepNenhum
+@onready var btn_rep_baixo  = %BtnRepBaixo
+@onready var btn_rep_medio  = %BtnRepMedio
+@onready var btn_rep_alto   = %BtnRepAlto
 
 func _ready():
+	if modo_jogo:
+		btn_tela_inicial.visible = true
+		btn_voltar.text = "↩ Retomar"
+
 	if GameData.berimbau_atual == GameData.BERIMBAU_VIOLA:
 		btn_viola.button_pressed = true
 	elif GameData.berimbau_atual == GameData.BERIMBAU_MEDIO:
@@ -103,4 +111,12 @@ func _on_btn_rep_alto_pressed():
 	GameData.repique_nivel = GameData.REPIQUE_ALTO
 
 func _on_btn_voltar_pressed() -> void:
+	if modo_jogo:
+		get_tree().paused = false
+		queue_free()
+	else:
+		get_tree().change_scene_to_file("res://scenes/menu_principal.tscn")
+
+func _on_btn_tela_inicial_pressed() -> void:
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/menu_principal.tscn")
