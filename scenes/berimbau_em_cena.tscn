@@ -10,18 +10,28 @@ albedo_color = Color(0.728202, 0.448721, 7.70092e-07, 1)
 albedo_color = Color(0.729412, 0.447059, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vtl4"]
-albedo_color = Color(0.72, 0.60, 0.30, 1)
+albedo_color = Color(0.72, 0.6, 0.3, 1)
 
 [node name="BerimbauKit" unique_id=154943311 instance=ExtResource("1_fceg5")]
 script = ExtResource("2_pcbtt")
 
-[node name="Cylinder" parent="." index="0" unique_id=1341500290]
-transform = Transform3D(-0.21628027, -0.94288826, 0.2533463, -0.2723989, -0.19090798, -0.94305503, 0.9375615, -0.27297541, -0.21555212, 0.7008627, -2.4153578, -0.3915857)
+[node name="Cylinder" parent="." index="0" unique_id=1750933438]
+transform = Transform3D(-0.21628027, -0.94288826, 0.2533463, -0.2723989, -0.19090798, -0.94305503, 0.9375615, -0.27297541, -0.21555212, 0.76882845, 1.2798226, -0.30620039)
 surface_material_override/0 = SubResource("StandardMaterial3D_fceg5")
 
-[node name="Sphere_001" parent="." index="1" unique_id=541870592]
-transform = Transform3D(-0.08527778, -0.9963573, 0, 0.99620587, -0.08526482, 0.017434957, -0.017371446, 0.0014868143, 0.999848, 0.17477718, -2.3892415, -0.43619668)
+[node name="Sphere_001" parent="." index="1" unique_id=1377042740]
+transform = Transform3D(-0.08527778, -0.9963573, 0, 0.99620587, -0.08526482, 0.017434957, -0.017371446, 0.0014868143, 0.999848, -0.0029786527, 0.83195734, 0.06915271)
 surface_material_override/0 = SubResource("StandardMaterial3D_pcbtt")
 
-[node name="Cube_003" parent="." index="2" unique_id=937545941]
+[node name="Cube_003" parent="." index="2" unique_id=875303600]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.384651, 0.05981505)
 surface_material_override/0 = SubResource("StandardMaterial3D_5vtl4")
+
+[node name="CordaTopo" type="Marker3D" parent="." index="3" unique_id=685535665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.4093676, -1.4062636)
+
+[node name="CordaCabaca" type="Marker3D" parent="." index="4" unique_id=1535963628]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.056907654, -0.07806653)
+
+[node name="CordaBase" type="Marker3D" parent="." index="5" unique_id=268466825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9613428, -0.1350146)

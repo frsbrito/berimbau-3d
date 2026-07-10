@@ -1,0 +1,108 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/menus/menu_sobre.gd" id="1_sobre"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_act_normal"]
+bg_color = Color(0.25118053, 0.16331753, 0.04786265, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.78431374, 0.6, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_act_hover"]
+bg_color = Color(0.38, 0.25, 0.07, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.78431374, 0.6, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_act_pressed"]
+bg_color = Color(0.78431374, 0.6, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="MenuSobre" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_sobre")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label_Titulo" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Sobre este jogo"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label_Corpo" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+theme_override_constants/line_spacing = 6
+text = "Berimbau 3D é um projeto educativo desenvolvido como Trabalho de Conclusão de Curso (TCC) do curso de Sistemas de Informação da Universidade Federal de Ouro Preto (UFOP), sob orientação do Prof. Fernando Bernardes de Oliveira.
+
+O jogo tem como objetivo apresentar, de forma interativa, os toques e timbres do berimbau, um dos instrumentos centrais da capoeira. Aqui você pode explorar livremente os diferentes toques e sons do instrumento, em um espaço de prática livre.
+
+Desenvolvimento: Felipe Ricardo Silva Brito
+Motor gráfico: Godot Engine
+Instrumentos utilizados: Mestre Canarinho (Capoeira Show, Araucária/PR)
+Captação dos sons: Mestre Deividi (União de Itapuã, São Paulo/SP)
+
+O conteúdo histórico e cultural sobre a capoeira e o berimbau apresentado neste simulador está em revisão bibliográfica contínua e pode ser atualizado conforme a pesquisa avança.
+
+Este projeto representa uma etapa de pesquisa acadêmica sobre o uso de jogos digitais no ensino de práticas musicais da cultura popular brasileira."
+autowrap_mode = 3
+
+[node name="Sep" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BtnVoltar" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(120, 36)
+theme_override_styles/normal = SubResource("StyleBoxFlat_act_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_act_pressed")
+text = "← Voltar"
+
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/BtnVoltar" to="." method="_on_btn_voltar_pressed"]

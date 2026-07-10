@@ -1,0 +1,132 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/menus/conteudo_texto.gd" id="1_conteudo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_act_normal"]
+bg_color = Color(0.25118053, 0.16331753, 0.04786265, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.78431374, 0.6, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_act_hover"]
+bg_color = Color(0.38, 0.25, 0.07, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.78431374, 0.6, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_act_pressed"]
+bg_color = Color(0.78431374, 0.6, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="MenuHistoria" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_conteudo")
+titulos_paginas = ["Origens Ancestrais", "Primeiros Registros no Brasil", "O Encontro com a Roda"]
+corpos_paginas = ["O berimbau é um tipo de arco musical, uma das famílias de instrumento mais antigas que existem. Ele nasceu na África: lá, um arco de madeira com uma cabaça (uma espécie de fruta seca e oca) presa na ponta já era tocado há muito tempo, com nomes como hungu ou m'bolumbumba, em Angola. Esse instrumento atravessou o oceano com os africanos trazidos à força para o Brasil como escravos, e foi assim que sua música chegou até aqui.", "No Brasil do século XIX, o berimbau ainda não tinha nada a ver com a capoeira. Ele era tocado por africanos escravizados e, depois, libertos, que vendiam doces e outras coisas pelas ruas do Rio de Janeiro. Batendo no arame, eles chamavam a atenção de quem passava, na hora de vender sua mercadoria. Até hoje existem desenhos da época mostrando essas cenas, como um retratando um vendedor tocando berimbau, feito pelo artista Joaquim Cândido Guillobel.", "Foi na Bahia, entre o fim do século XIX e o começo do século XX, que o berimbau se juntou à capoeira. Antes disso, a roda era acompanhada só por tambor e palma. Aos poucos, o berimbau foi ganhando espaço, até virar quem manda no jogo, decidindo o ritmo, a velocidade e até o estilo da capoeira que está sendo jogada."]
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="LabelTitulo" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LabelCorpo" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+theme_override_constants/line_spacing = 6
+autowrap_mode = 3
+
+[node name="HBoxContainer_Paginacao" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="BtnAnterior" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 36)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_act_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_act_pressed")
+text = "← Anterior"
+
+[node name="LabelProgresso" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+vertical_alignment = 1
+horizontal_alignment = 1
+
+[node name="BtnProximo" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 36)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_act_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_act_pressed")
+text = "Próximo →"
+
+[node name="Sep" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BtnVoltar" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(120, 36)
+theme_override_styles/normal = SubResource("StyleBoxFlat_act_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_act_pressed")
+text = "← Voltar"
+
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao/BtnAnterior" to="." method="_on_btn_anterior_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao/BtnProximo" to="." method="_on_btn_proximo_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/BtnVoltar" to="." method="_on_btn_voltar_pressed"]

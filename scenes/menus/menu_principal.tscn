@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b6ixh1afmwu5"]
 
-[ext_resource type="Script" uid="uid://c8v6h5opvwulk" path="res://scenes/menu_principal.gd" id="1_i85hu"]
+[ext_resource type="Script" uid="uid://c8v6h5opvwulk" path="res://scenes/menus/menu_principal.gd" id="1_i85hu"]
 [ext_resource type="Theme" uid="uid://drjmxq66qsobd" path="res://assets/themes/default_theme.tres" id="1_mk4g1"]
-[ext_resource type="Texture2D" uid="uid://nlgbh77vee1u" path="res://assets/sprites/backgrounds/background.png" id="2_bg001"]
+[ext_resource type="Texture2D" uid="uid://dbg1ein6akfy1" path="res://assets/sprites/backgrounds/36590765886_b57e388516_k.jpg" id="3_iep14"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
 bg_color = Color(0.25118053, 0.16331753, 0.04786265, 1)
@@ -35,6 +35,9 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="FontVariation" id="FontVariation_titulo"]
+spacing_glyph = 3
+
 [node name="MenuPrincipal" type="Control" unique_id=1151362337]
 layout_mode = 3
 anchors_preset = 0
@@ -58,10 +61,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -21.0
+offset_bottom = 112.125
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_bg001")
-expand_mode = 2
+texture = ExtResource("3_iep14")
+expand_mode = 5
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1273341966]
 layout_mode = 1
@@ -71,9 +77,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -200.0
-offset_top = -130.0
+offset_top = -195.0
 offset_right = 200.0
-offset_bottom = 130.0
+offset_bottom = 195.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
@@ -82,17 +88,18 @@ alignment = 1
 [node name="Label_Titulo" type="Label" parent="Panel/VBoxContainer" unique_id=1313299091]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.98, 0.85, 0.35, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 36
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.85)
+theme_override_colors/font_outline_color = Color(0.35, 0.15, 0.02, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = SubResource("FontVariation_titulo")
+theme_override_font_sizes/font_size = 52
 text = "Berimbau 3D"
 horizontal_alignment = 1
 
 [node name="BtnJogar" type="Button" parent="Panel/VBoxContainer" unique_id=673079833]
-custom_minimum_size = Vector2(180, 44)
+custom_minimum_size = Vector2(220, 44)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
@@ -101,7 +108,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
 text = "Jogar"
 
 [node name="BtnOpcoes" type="Button" parent="Panel/VBoxContainer" unique_id=216605372]
-custom_minimum_size = Vector2(180, 44)
+custom_minimum_size = Vector2(220, 44)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
@@ -109,5 +116,25 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
 text = "Opções"
 
+[node name="BtnCapoeiraBerimbau" type="Button" parent="Panel/VBoxContainer" unique_id=600000101]
+custom_minimum_size = Vector2(220, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "Capoeira e Berimbau"
+
+[node name="BtnSobre" type="Button" parent="Panel/VBoxContainer" unique_id=600000102]
+custom_minimum_size = Vector2(220, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "Sobre"
+
 [connection signal="pressed" from="Panel/VBoxContainer/BtnJogar" to="." method="_on_btn_jogar_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/BtnOpcoes" to="." method="_on_btn_opcoes_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/BtnCapoeiraBerimbau" to="." method="_on_btn_capoeira_berimbau_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/BtnSobre" to="." method="_on_btn_sobre_pressed"]

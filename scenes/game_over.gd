@@ -44,7 +44,7 @@ func _on_btn_jogar_novamente_pressed() -> void:
 	get_tree().reload_current_scene()
 
 func _on_btn_menu_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/menu_principal.tscn")
+	get_tree().change_scene_to_file("res://scenes/menus/menu_principal.tscn")
 
 func _on_btn_opcoes_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/menu_opcoes_principal.tscn")
+	get_tree().change_scene_to_file("res://scenes/menus/menu_opcoes_principal.tscn")
