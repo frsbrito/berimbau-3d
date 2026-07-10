@@ -9,48 +9,65 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wfyh"]
 size = Vector2(102.7, 25.2)
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ambiente"]
+sky_top_color = Color(3.85046e-07, 2.695322e-06, 0.94972867, 1)
+sky_horizon_color = Color(0.85, 0.55, 0.35, 1)
+sky_curve = 0.11367877
+ground_bottom_color = Color(0.19216788, 0.14882141, 0.0049733506, 1)
+ground_horizon_color = Color(0.85, 0.55, 0.35, 1)
+ground_curve = 0.06727172
+
+[sub_resource type="Sky" id="Sky_ambiente"]
+sky_material = SubResource("ProceduralSkyMaterial_ambiente")
+
+[sub_resource type="Environment" id="Environment_ambiente"]
+background_mode = 2
+background_energy_multiplier = 1.7
+sky = SubResource("Sky_ambiente")
+ambient_light_source = 3
+ambient_light_energy = 0.6
+
 [node name="Node3D" type="Node3D" unique_id=2000144735]
 script = ExtResource("1_o5qli")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2124184955]
 
-[node name="Fundo_Canvas" type="ColorRect" parent="CanvasLayer" unique_id=47765077]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.08, 0.05, 0.01, 0.55)
-
 [node name="Lane_Solto" type="ColorRect" parent="CanvasLayer" unique_id=300000001]
-layout_mode = 0
 offset_right = 1.0
 offset_bottom = 1.0
 color = Color(0.55, 0.55, 0.55, 0.15)
 
 [node name="Lane_Chiado" type="ColorRect" parent="CanvasLayer" unique_id=300000002]
-layout_mode = 0
 offset_right = 1.0
 offset_bottom = 1.0
-color = Color(0.20, 0.55, 0.90, 0.18)
+color = Color(0.2, 0.55, 0.9, 0.18)
 
 [node name="Lane_Preso" type="ColorRect" parent="CanvasLayer" unique_id=300000003]
-layout_mode = 0
 offset_right = 1.0
 offset_bottom = 1.0
 color = Color(0.85, 0.25, 0.15, 0.18)
 
 [node name="HitZone_Visual" type="ColorRect" parent="CanvasLayer" unique_id=300000004]
-layout_mode = 0
 offset_right = 1.0
 offset_bottom = 1.0
 color = Color(0.98, 0.85, 0.35, 0.85)
 
-[node name="DebugLabel" type="Label" parent="CanvasLayer" unique_id=1330033322]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Estado:"
-metadata/_edit_use_anchors_ = true
+[node name="JulgamentoLabel" type="Label" parent="CanvasLayer" unique_id=300000005]
+visible = false
+offset_right = 200.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RepiqueLabel" type="Label" parent="CanvasLayer" unique_id=300000006]
+visible = false
+offset_right = 260.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 28
+text = "Repique!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Pistas" type="Node2D" parent="CanvasLayer" unique_id=2053490173]
 
@@ -77,12 +94,23 @@ metadata/_edit_use_anchors_ = true
 script = ExtResource("4_tefeu")
 touch_controls = NodePath("../../TouchControls")
 
+[node name="LimiteFlash" type="ColorRect" parent="CanvasLayer" unique_id=300000007]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=300000008]
+environment = SubResource("Environment_ambiente")
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=163319482]
 transform = Transform3D(-0.491193, 0, 0.871051, 0, 1, 0, -0.871051, 0, -0.491193, 12.021, 2.526, -6.173)
 current = true
 
-[node name="SoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1798855191]
-max_distance = 117.03
+[node name="SoundPlayer" type="AudioStreamPlayer" parent="." unique_id=1798855191]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1639073092]
 transform = Transform3D(-0.81063485, -0.58555204, 0, 0.58555204, -0.81063485, 0, 0, 0, 1, -4.647921, 2.8512502, 4.5081816)
