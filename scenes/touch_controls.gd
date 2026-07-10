@@ -1,5 +1,9 @@
 extends Node
 
+signal camera_interagida()
+signal limite_atingido()
+signal zoom_alterado(fracao: float)
+
 @export var camera: Camera3D
 @export var pivot: Vector3 = Vector3.ZERO
 @export var orbit_sensitivity: float = 0.5
@@ -17,6 +21,7 @@ extends Node
 @export var baqueta_altura_ratio: float = 0.40
 @export var baqueta_margem_inferior_ratio: float = 0.15
 @export var baqueta_margem_direita_ratio: float = 0.025
+@export var baqueta_raio_ratio: float = 0.42
 
 var _yaw: float = 0.0
 var _pitch: float = 0.0
@@ -59,6 +64,16 @@ func _get_regioes() -> Dictionary:
 		)
 	}
 
+func _baqueta_circulo(rect: Rect2) -> Dictionary:
+	return {
+		"centro": rect.get_center(),
+		"raio": minf(rect.size.x, rect.size.y) * baqueta_raio_ratio
+	}
+
+func _toque_na_baqueta(pos: Vector2, rect: Rect2) -> bool:
+	var circulo = _baqueta_circulo(rect)
+	return pos.distance_to(circulo.centro) <= circulo.raio
+
 func _input(event):
 	var r = _get_regioes()
 
@@ -84,7 +99,7 @@ func _on_toque(event: InputEventScreenTouch, r: Dictionary):
 			if _dobrao_touch_index == -1:
 				_dobrao_touch_index = event.index
 				_atualizar_dobrao(event.position.x, r.dobrao)
-		elif r.baqueta.has_point(event.position):
+		elif _toque_na_baqueta(event.position, r.baqueta):
 			if _baqueta_touch_index == -1:
 				_baqueta_touch_index = event.index
 				Input.action_press("toque_baqueta")
@@ -135,7 +150,7 @@ func _atualizar_dobrao(touch_x: float, dobrao_rect: Rect2):
 	var x_local = touch_x - dobrao_rect.position.x
 	var zone_w = dobrao_rect.size.x / 3.0
 	if x_local < zone_w:
-		pass  # SOLTO — sem action
+		pass  # SOLTO, sem action
 	elif x_local < zone_w * 2.0:
 		Input.action_press("dobrao_chiado")
 	else:
@@ -145,7 +160,7 @@ func _on_mouse_botao(event: InputEventMouseButton, r: Dictionary):
 	if event.pressed:
 		if r.dobrao.has_point(event.position):
 			_atualizar_dobrao(event.position.x, r.dobrao)
-		elif r.baqueta.has_point(event.position):
+		elif _toque_na_baqueta(event.position, r.baqueta):
 			Input.action_press("toque_baqueta")
 		else:
 			_mouse_in_camera_region = true
@@ -160,14 +175,27 @@ func _on_mouse_movimento(event: InputEventMouseMotion):
 		_orbitar(event.relative)
 
 func _zoom(delta: float):
-	_distance = clamp(_distance + delta, zoom_min, zoom_max)
+	var alvo = _distance + delta
+	var novo = clamp(alvo, zoom_min, zoom_max)
+	if novo != alvo:
+		limite_atingido.emit()
+	_distance = novo
 	_atualizar_camera()
+	camera_interagida.emit()
+	zoom_alterado.emit(_zoom_fracao())
+
+func _zoom_fracao() -> float:
+	return (_distance - zoom_min) / (zoom_max - zoom_min)
 
 func _orbitar(delta: Vector2):
 	_yaw += deg_to_rad(delta.x) * orbit_sensitivity
-	_pitch -= deg_to_rad(delta.y) * orbit_sensitivity
-	_pitch = clamp(_pitch, deg_to_rad(-80.0), deg_to_rad(80.0))
+	var alvo_pitch = _pitch - deg_to_rad(delta.y) * orbit_sensitivity
+	var novo_pitch = clamp(alvo_pitch, deg_to_rad(-80.0), deg_to_rad(80.0))
+	if novo_pitch != alvo_pitch:
+		limite_atingido.emit()
+	_pitch = novo_pitch
 	_atualizar_camera()
+	camera_interagida.emit()
 
 func _atualizar_camera():
 	if not camera:

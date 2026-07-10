@@ -2,9 +2,6 @@ extends Node2D
 
 @export var touch_controls: Node
 
-const COR_SOLTO   = Color(0.55, 0.55, 0.55, 0.55)
-const COR_CHIADO  = Color(0.20, 0.55, 0.90, 0.60)
-const COR_PRESO   = Color(0.85, 0.25, 0.15, 0.60)
 const COR_BAQUETA = Color(0.90, 0.72, 0.10, 0.55)
 const COR_BAQUETA_ATIVO = Color(1.00, 0.88, 0.20, 0.90)
 const COR_BORDA   = Color(1.00, 1.00, 1.00, 0.45)
@@ -20,10 +17,25 @@ var _chiado_ativo: bool = false
 var _preso_ativo: bool = false
 var _baqueta_ativo: bool = false
 
+const ZOOM_JANELA_VISIVEL = 0.35
+var _zoom_fracao: float = 0.5
+var _zoom_tempo_restante: float = 0.0
+
+func _ready():
+	if touch_controls:
+		touch_controls.zoom_alterado.connect(_on_zoom_alterado)
+
+func _on_zoom_alterado(fracao: float):
+	_zoom_fracao = fracao
+	_zoom_tempo_restante = ZOOM_JANELA_VISIVEL
+
 func _process(delta):
 	_chiado_ativo = Input.is_action_pressed("dobrao_chiado")
 	_preso_ativo  = Input.is_action_pressed("dobrao_preso")
 	_baqueta_ativo = Input.is_action_pressed("toque_baqueta")
+
+	if _zoom_tempo_restante > 0.0:
+		_zoom_tempo_restante -= delta
 
 	var size = get_viewport().get_visible_rect().size
 	var rects = _get_rects(size)
@@ -52,42 +64,28 @@ func _draw():
 	var rects = _get_rects(size)
 	_desenhar_dobrao(rects.dobrao)
 	_desenhar_baqueta(rects.baqueta)
+	_desenhar_zoom_indicador(size)
 
 func _get_rects(size: Vector2) -> Dictionary:
-	var dlr  = touch_controls.dobrao_largura_ratio          if touch_controls else 0.45
-	var dar  = touch_controls.dobrao_altura_ratio           if touch_controls else 0.30
-	var blr  = touch_controls.baqueta_largura_ratio         if touch_controls else 0.35
-	var bar  = touch_controls.baqueta_altura_ratio          if touch_controls else 0.25
-	var dmi  = touch_controls.dobrao_margem_inferior_ratio   if touch_controls else 0.0
-	var dme  = touch_controls.dobrao_margem_esquerda_ratio   if touch_controls else 0.0
-	var bmi  = touch_controls.baqueta_margem_inferior_ratio  if touch_controls else 0.0
-	var bmd  = touch_controls.baqueta_margem_direita_ratio   if touch_controls else 0.0
+	if touch_controls:
+		return touch_controls._get_regioes()
 	return {
-		"dobrao": Rect2(
-			size.x * dme,
-			size.y * (1.0 - dar) - size.y * dmi,
-			size.x * dlr,
-			size.y * dar
-		),
-		"baqueta": Rect2(
-			size.x * (1.0 - blr) - size.x * bmd,
-			size.y * (1.0 - bar) - size.y * bmi,
-			size.x * blr,
-			size.y * bar
-		)
+		"dobrao": Rect2(0, size.y * 0.7, size.x * 0.45, size.y * 0.30),
+		"baqueta": Rect2(size.x * 0.6, size.y * 0.75, size.x * 0.35, size.y * 0.25)
 	}
 
 func _desenhar_dobrao(rect: Rect2):
 	var zone_w = rect.size.x / 3.0
 	var zonas = [
-		{"offset": 0.0,        "cor": COR_SOLTO,  "label": "SOLTO",  "ativo": not _chiado_ativo and not _preso_ativo},
-		{"offset": zone_w,     "cor": COR_CHIADO, "label": "CHIADO", "ativo": _chiado_ativo},
-		{"offset": zone_w * 2, "cor": COR_PRESO,  "label": "PRESO",  "ativo": _preso_ativo},
+		{"offset": 0.0,        "tipo": GameData.TIPO_SOLTO,  "alpha": 0.55, "label": "SOLTO",  "ativo": not _chiado_ativo and not _preso_ativo},
+		{"offset": zone_w,     "tipo": GameData.TIPO_CHIADO, "alpha": 0.60, "label": "CHIADO", "ativo": _chiado_ativo},
+		{"offset": zone_w * 2, "tipo": GameData.TIPO_PRESO,  "alpha": 0.60, "label": "PRESO",  "ativo": _preso_ativo},
 	]
 
 	for zona in zonas:
 		var zone_rect = Rect2(rect.position + Vector2(zona.offset, 0), Vector2(zone_w, rect.size.y))
-		var cor = zona.cor
+		var base = GameData.cor_por_tipo(zona.tipo)
+		var cor = Color(base.r, base.g, base.b, zona.alpha)
 		if zona.ativo:
 			cor = Color(cor.r + 0.15, cor.g + 0.15, cor.b + 0.15, minf(cor.a + 0.25, 1.0))
 		draw_rect(zone_rect, cor)
@@ -105,7 +103,8 @@ func _desenhar_dobrao(rect: Rect2):
 func _desenhar_baqueta(rect: Rect2):
 	var cor = COR_BAQUETA_ATIVO if _baqueta_ativo else COR_BAQUETA
 	var center = rect.get_center()
-	var raio = minf(rect.size.x, rect.size.y) * 0.42
+	var raio_ratio = touch_controls.baqueta_raio_ratio if touch_controls else 0.42
+	var raio = minf(rect.size.x, rect.size.y) * raio_ratio
 	if _baqueta_ativo:
 		raio *= 1.08
 
@@ -123,3 +122,18 @@ func _desenhar_baqueta(rect: Rect2):
 
 	var font = ThemeDB.fallback_font
 	draw_string(font, Vector2(rect.position.x, center.y + FONT_SIZE * 0.45), "TOCAR", HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, FONT_SIZE + 4, COR_TEXTO)
+
+func _desenhar_zoom_indicador(size: Vector2):
+	if _zoom_tempo_restante <= 0.0:
+		return
+	var alpha = clampf(_zoom_tempo_restante / ZOOM_JANELA_VISIVEL, 0.0, 1.0)
+	var largura = 18.0
+	var x = size.x * 0.93
+	var topo = size.y * 0.22
+	var base = size.y * 0.42
+	var altura = base - topo
+	var preenchido = altura * _zoom_fracao
+
+	draw_rect(Rect2(x, topo, largura, altura), Color(1, 1, 1, 0.18 * alpha))
+	draw_rect(Rect2(x, base - preenchido, largura, preenchido), Color(0.95, 0.82, 0.30, 0.85 * alpha))
+	draw_rect(Rect2(x, topo, largura, altura), Color(COR_BORDA.r, COR_BORDA.g, COR_BORDA.b, COR_BORDA.a * alpha), false, 2.0)
