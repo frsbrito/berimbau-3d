@@ -17,7 +17,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="Berimbau_3D"
 run/main_scene="uid://b6ixh1afmwu5"
 config/features=PackedStringArray("4.7", "Mobile")
-config/icon="uid://cyk4d832w3uap"
+config/icon="uid://85djx4a8a6js"
 
 [audio]
 

@@ -2,7 +2,10 @@
 
 [ext_resource type="Script" uid="uid://c8v6h5opvwulk" path="res://scenes/menus/menu_principal.gd" id="1_i85hu"]
 [ext_resource type="Theme" uid="uid://drjmxq66qsobd" path="res://assets/themes/default_theme.tres" id="1_mk4g1"]
-[ext_resource type="Texture2D" uid="uid://dbg1ein6akfy1" path="res://assets/sprites/backgrounds/36590765886_b57e388516_k.jpg" id="3_iep14"]
+[ext_resource type="Texture2D" uid="uid://dw13bs80hjwtp" path="res://assets/sprites/backgrounds/menu-principal.jpg" id="3_qsijh"]
+
+[sub_resource type="FontVariation" id="FontVariation_titulo"]
+spacing_glyph = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
 bg_color = Color(0.25118053, 0.16331753, 0.04786265, 1)
@@ -35,9 +38,6 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="FontVariation" id="FontVariation_titulo"]
-spacing_glyph = 3
-
 [node name="MenuPrincipal" type="Control" unique_id=1151362337]
 layout_mode = 3
 anchors_preset = 0
@@ -65,7 +65,7 @@ offset_top = -21.0
 offset_bottom = 112.125
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_iep14")
+texture = ExtResource("3_qsijh")
 expand_mode = 5
 stretch_mode = 5
 
