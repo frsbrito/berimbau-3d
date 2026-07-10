@@ -21,22 +21,23 @@ func _ready():
 	erros_label.visible = not pratica_livre
 	porcentagem_label.visible = not pratica_livre
 
-func _atualizar_opcoes_atuais_label():
-	if GameData.pratica_livre_ativa:
-		opcoes_atuais_label.text = "Toque: %s\nTimbre: %s\nVelocidade: %s" % [
-			GameData.nome_toque_atual(),
-			GameData.nome_berimbau_atual(),
-			GameData.nome_velocidade_atual(),
-		]
-		return
+const COR_VALOR_OPCAO = "#ffffff"
 
-	opcoes_atuais_label.text = "Toque: %s\nTimbre: %s\nVelocidade: %s\nRepique: %s\nDuração: %s" % [
-		GameData.nome_toque_atual(),
-		GameData.nome_berimbau_atual(),
-		GameData.nome_velocidade_atual(),
-		GameData.nome_repique_nivel(),
-		GameData.nome_duracao_partida(),
+func _linha_opcao(rotulo: String, valor: String) -> String:
+	return "%s [color=%s]%s[/color]" % [rotulo, COR_VALOR_OPCAO, valor]
+
+func _atualizar_opcoes_atuais_label():
+	var linhas = [
+		_linha_opcao("Toque:", GameData.nome_toque_atual()),
+		_linha_opcao("Timbre:", GameData.nome_berimbau_atual()),
+		_linha_opcao("Velocidade:", GameData.nome_velocidade_atual()),
 	]
+
+	if not GameData.pratica_livre_ativa:
+		linhas.append(_linha_opcao("Repique:", GameData.nome_repique_nivel()))
+		linhas.append(_linha_opcao("Duração:", GameData.nome_duracao_partida()))
+
+	opcoes_atuais_label.text = "[right]%s[/right]" % "\n".join(linhas)
 
 func atualizar_hud(acertos, erros):
 	acertos_label.text = "Acertos: " + str(acertos)
@@ -69,4 +70,8 @@ func _on_finalizar_pressed() -> void:
 	finalizar_pressed.emit()
 
 func _on_encerrar_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/menus/menu_principal.tscn")
+
+func _on_voltar_pressed() -> void:
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/menus/menu_principal.tscn")

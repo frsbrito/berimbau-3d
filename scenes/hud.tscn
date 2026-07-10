@@ -2,6 +2,18 @@
 
 [ext_resource type="Script" uid="uid://bcddj8kr6536n" path="res://scenes/hud.gd" id="1_ahhtf"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_placar"]
+bg_color = Color(0.05, 0.07, 0.05, 0.4)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.83, 0, 0.35)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="HUD" type="Control" unique_id=1709008806]
 layout_mode = 3
 anchors_preset = 0
@@ -9,96 +21,123 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_ahhtf")
 
+[node name="PlacarPanel" type="Panel" parent="." unique_id=1900000001]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1092.0
+offset_top = 634.0
+offset_right = 1240.0
+offset_bottom = 720.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_placar")
+
 [node name="AcertosLabel" type="Label" parent="." unique_id=1768732039]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1100.0
-offset_top = 8.0
-offset_right = 1232.0
-offset_bottom = 32.0
+offset_left = 1104.0
+offset_top = 640.0
+offset_right = 1236.0
+offset_bottom = 664.0
 grow_horizontal = 0
-theme_override_colors/font_color = Color(0.98, 0.85, 0.35, 1)
+theme_override_colors/font_color = Color(0.35, 0.85, 0.5, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 16
 text = "Acertos: 0"
+horizontal_alignment = 2
 
 [node name="ErrosLabel" type="Label" parent="." unique_id=1145818363]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1100.0
-offset_top = 34.0
-offset_right = 1232.0
-offset_bottom = 58.0
+offset_left = 1104.0
+offset_top = 666.0
+offset_right = 1236.0
+offset_bottom = 690.0
 grow_horizontal = 0
-theme_override_colors/font_color = Color(0.98, 0.85, 0.35, 1)
+theme_override_colors/font_color = Color(0.92, 0.4, 0.35, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 16
 text = "Erros: 0"
+horizontal_alignment = 2
 
 [node name="PorcentagemLabel" type="Label" parent="." unique_id=1621319468]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1100.0
-offset_top = 60.0
-offset_right = 1232.0
-offset_bottom = 84.0
+offset_left = 1104.0
+offset_top = 692.0
+offset_right = 1236.0
+offset_bottom = 716.0
 grow_horizontal = 0
-theme_override_colors/font_color = Color(0.98, 0.85, 0.35, 1)
+theme_override_colors/font_color = Color(1, 0.85, 0.25, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 17
 text = "Precisão: 100%"
+horizontal_alignment = 2
 
 [node name="Config" type="Button" parent="." unique_id=1437656615]
 layout_mode = 1
-offset_left = 8.0
-offset_top = 680.0
-offset_right = 110.0
-offset_bottom = 712.0
+offset_left = 1157.0
+offset_top = 13.0
+offset_right = 1267.0
+offset_bottom = 61.0
 text = "Opções"
+
+[node name="Voltar" type="Button" parent="." unique_id=2200000001]
+layout_mode = 1
+offset_left = 13.0
+offset_top = 659.0
+offset_right = 123.0
+offset_bottom = 707.0
+text = "Voltar"
 
 [node name="Finalizar" type="Button" parent="." unique_id=1837148487]
 visible = false
 layout_mode = 1
-offset_left = 118.0
-offset_top = 680.0
-offset_right = 220.0
-offset_bottom = 712.0
+offset_left = 131.0
+offset_top = 659.0
+offset_right = 241.0
+offset_bottom = 707.0
 text = "Finalizar"
 
-[node name="Encerrar" type="Button" parent="."]
+[node name="Encerrar" type="Button" parent="." unique_id=2114822315]
 visible = false
 layout_mode = 1
-offset_left = 118.0
-offset_top = 680.0
-offset_right = 220.0
-offset_bottom = 712.0
+offset_left = 131.0
+offset_top = 659.0
+offset_right = 241.0
+offset_bottom = 707.0
 text = "Encerrar"
 
-[node name="OpcoesAtuaisLabel" type="Label" parent="." unique_id=778430240]
+[node name="OpcoesAtuaisLabel" type="RichTextLabel" parent="." unique_id=778430240]
 layout_mode = 1
-offset_left = 8.0
-offset_top = 565.0
-offset_right = 290.0
-offset_bottom = 677.0
-theme_override_colors/font_color = Color(0.98, 0.85, 0.35, 1)
+offset_left = 985.0
+offset_top = 63.0
+offset_right = 1267.0
+offset_bottom = 175.0
+theme_override_colors/default_color = Color(0.98, 0.85, 0.35, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 14
-text = "Toque: Angola
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "[right]Toque: Angola
 Timbre: Viola
 Velocidade: Equilibrado
 Repique: Nenhum
-Duração: 40 notas"
+Duração: 40 notas[/right]"
+fit_content = true
+scroll_active = false
 
 [connection signal="pressed" from="Config" to="." method="_on_config_pressed"]
+[connection signal="pressed" from="Voltar" to="." method="_on_voltar_pressed"]
 [connection signal="pressed" from="Finalizar" to="." method="_on_finalizar_pressed"]
 [connection signal="pressed" from="Encerrar" to="." method="_on_encerrar_pressed"]
