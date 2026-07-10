@@ -6,12 +6,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
 size = Vector2(256, 256)
 
-[node name="Nota" type="Area2D"]
+[node name="Nota" type="Area2D" unique_id=778882962]
 scale = Vector2(0.15, 0.15)
 script = ExtResource("1_tich3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=521288418]
 texture = ExtResource("1_np0oh")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=353932787]
 shape = SubResource("RectangleShape2D_jyhfs")

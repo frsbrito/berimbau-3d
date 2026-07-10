@@ -94,6 +94,7 @@ var _julgamento_pos_y_base = 0.0
 # --- Variáveis do Jogo ---
 var toque_index = 0
 var ciclo_atual: Array = []
+var _ultimo_ciclo_foi_repique: bool = false
 var notas_na_zona = []
 var total_acertos = 0
 var total_erros = 0
@@ -265,10 +266,17 @@ func _on_timer_timeout():
 	timer_gerador.start(intervalo)
 
 func _escolher_ciclo() -> Array:
+	# Um repique nunca pode vir logo depois de outro: o ciclo seguinte a um
+	# repique é sempre o toque base, para não perder a sonoridade do toque.
+	if _ultimo_ciclo_foi_repique:
+		_ultimo_ciclo_foi_repique = false
+		return GameData.get_toque_atual_array()
+
 	var prob = GameData.get_probabilidade_repique()
 	if prob > 0.0 and randf() < prob:
 		var rep = GameData.get_repique_aleatorio()
 		if not rep.is_empty():
+			_ultimo_ciclo_foi_repique = true
 			_mostrar_banner_repique()
 			return rep
 	return GameData.get_toque_atual_array()
