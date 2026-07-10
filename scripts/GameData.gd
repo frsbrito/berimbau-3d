@@ -62,8 +62,8 @@ func modo_livre_ativo() -> bool:
 var toques = {
 	"Angola": [
 		[TIPO_CHIADO, 0.45],
-		[TIPO_CHIADO, 0.45],
-		[TIPO_SOLTO,  0.9],
+		[TIPO_CHIADO, 0.30],
+		[TIPO_SOLTO,  0.65],
 		[TIPO_PRESO,  1.45],
 	],
 	"SaoBentoGrande": [
@@ -71,13 +71,13 @@ var toques = {
 		[TIPO_CHIADO, 0.35],
 		[TIPO_PRESO,  0.45],
 		[TIPO_SOLTO,  0.65],
-		[TIPO_SOLTO,  0.85],
+		[TIPO_SOLTO,  0.75],
 	],
 	"SaoBentoPequeno": [
 		[TIPO_CHIADO, 0.35],
 		[TIPO_CHIADO, 0.35],
 		[TIPO_PRESO,  0.45],
-		[TIPO_SOLTO,  0.85],
+		[TIPO_SOLTO,  1.2],
 	],
 }
 
@@ -103,85 +103,57 @@ var toques = {
 # mesmo nome usado em GameData.toques.
 var repiques = {
 	"Angola": [
-		# Toque base: [CHIADO 0.45] [CHIADO 0.45] [SOLTO 0.9] [PRESO 1.45]
 		{
-			"descricao": "Insere um solto e um chiado extras logo após a primeira nota",
-			"notas": [
-				[TIPO_CHIADO, 0.45],
-				[TIPO_SOLTO,  0.3],
-				[TIPO_CHIADO, 0.3],
-				[TIPO_CHIADO, 0.45],
-				[TIPO_SOLTO,  0.9],
-				[TIPO_PRESO,  1.45],
-			],
-		},
-		{
-			"descricao": "Substitui a nota solto (3ª) por duas notas preso mais curtas",
+			"descricao": "Troca o preso final por um chiado e um solto extras, terminando o ciclo sem nota presa",
 			"notas": [
 				[TIPO_CHIADO, 0.45],
 				[TIPO_CHIADO, 0.45],
-				[TIPO_PRESO,  0.4],
-				[TIPO_PRESO,  0.4],
-				[TIPO_PRESO,  1.45],
+				[TIPO_SOLTO,  0.4],
+				[TIPO_CHIADO, 0.45],
+				[TIPO_SOLTO,  0.45],
 			],
 		},
 		{
-			"descricao": "Mesmas notas do toque base, só acelera a primeira chiado (0.45s para 0.25s)",
+			"descricao": "Estende o ciclo com chiados extras e um trecho de preso/solto alternados antes de fechar no mesmo preso longo do toque base",
 			"notas": [
-				[TIPO_CHIADO, 0.25],
 				[TIPO_CHIADO, 0.45],
-				[TIPO_SOLTO,  0.9],
-				[TIPO_PRESO,  1.45],
+				[TIPO_CHIADO, 0.45],
+				[TIPO_SOLTO,  0.4],
+				[TIPO_CHIADO, 0.55],
+				[TIPO_CHIADO, 0.45],
+				[TIPO_PRESO,  0.45],
+				[TIPO_SOLTO,  0.6],
+				[TIPO_PRESO,  0.6],
+				[TIPO_SOLTO,  0.6],
+				[TIPO_PRESO,  1.45]
 			],
-		},
+		}
 	],
 	"SaoBentoGrande": [
-		# Toque base: [CHIADO 0.35] [CHIADO 0.35] [PRESO 0.45] [SOLTO 0.65] [SOLTO 0.85]
 		{
-			"descricao": "Insere um solto extra entre a segunda chiado e o preso",
+			"descricao": "Insere um preso extra entre os dois soltos finais do toque base",
 			"notas": [
 				[TIPO_CHIADO, 0.35],
 				[TIPO_CHIADO, 0.35],
-				[TIPO_SOLTO,  0.25],
-				[TIPO_PRESO,  0.45],
-				[TIPO_SOLTO,  0.65],
-				[TIPO_SOLTO,  0.85],
+				[TIPO_PRESO,  0.4],
+				[TIPO_SOLTO,  0.4],
+				[TIPO_PRESO,  0.4],
+				[TIPO_SOLTO,  0.75],
 			],
-		},
-		{
-			"descricao": "Substitui a nota preso (3ª) por preso e chiado mais curtos",
-			"notas": [
-				[TIPO_CHIADO, 0.35],
-				[TIPO_CHIADO, 0.35],
-				[TIPO_PRESO,  0.3],
-				[TIPO_CHIADO, 0.3],
-				[TIPO_SOLTO,  0.65],
-				[TIPO_SOLTO,  0.85],
-			],
-		},
+		}
 	],
 	"SaoBentoPequeno": [
-		# Toque base: [CHIADO 0.35] [CHIADO 0.35] [PRESO 0.45] [SOLTO 0.85]
 		{
-			"descricao": "Insere um solto extra entre o preso e o solto final",
+			"descricao": "Divide o solto final longo em dois soltos mais curtos, com um preso inserido entre eles",
 			"notas": [
 				[TIPO_CHIADO, 0.35],
 				[TIPO_CHIADO, 0.35],
-				[TIPO_PRESO,  0.45],
-				[TIPO_SOLTO,  0.25],
-				[TIPO_SOLTO,  0.85],
+				[TIPO_PRESO,  0.4],
+				[TIPO_SOLTO,  0.4],
+				[TIPO_PRESO,  0.4],
+				[TIPO_SOLTO,  0.75],
 			],
-		},
-		{
-			"descricao": "Substitui a segunda nota chiado por duas notas preso mais curtas",
-			"notas": [
-				[TIPO_CHIADO, 0.35],
-				[TIPO_PRESO,  0.3],
-				[TIPO_PRESO,  0.3],
-				[TIPO_PRESO,  0.45],
-				[TIPO_SOLTO,  0.85],
-			],
-		},
+		}
 	],
 }
 
