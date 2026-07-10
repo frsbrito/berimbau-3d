@@ -1,21 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3 uid="uid://d260tp7ojscw6"]
 
-[ext_resource type="Script" path="res://scenes/menus/conteudo_texto.gd" id="1_conteudo"]
+[ext_resource type="Script" uid="uid://cum7pu6vnl8md" path="res://scenes/menus/conteudo_texto.gd" id="1_conteudo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_act_normal"]
 bg_color = Color(0.25118053, 0.16331753, 0.04786265, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.78431374, 0.6, 0, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_act_hover"]
-bg_color = Color(0.38, 0.25, 0.07, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -33,14 +21,26 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[node name="MenuBerimbauRoda" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_act_hover"]
+bg_color = Color(0.38, 0.25, 0.07, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.78431374, 0.6, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="MenuBerimbauRoda" type="Control" unique_id=2142335965]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_conteudo")
-titulos_paginas = ["Quem manda no jogo", "Os três berimbaus", "A palavra de quem toca o gunga"]
-corpos_paginas = ["Numa roda de capoeira, é o berimbau quem dá a última palavra. As combinações de toque tocadas por ele sugerem o tipo de jogo que os dois capoeiristas devem fazer ali, mais lento e rasteiro, ou mais rápido e acrobático. Sem o berimbau, a roda simplesmente não acontece: os outros instrumentos, como pandeiro, atabaque, agogô e reco-reco, entram depois formando o que se chama de bateria, mas quem abre e comanda tudo é ele.", "Uma bateria completa de capoeira costuma reunir três berimbaus afinados de forma diferente. O gunga tem o som mais grave e, na maioria dos grupos, é quem estabelece a base do ritmo que está sendo tocado. O médio fica no meio do caminho, dobrando ou complementando o que o gunga propõe. Já a viola, de som mais agudo, tem liberdade pra improvisar por cima dessa base, soltando repiques e floreios que dão cor à música.", "Quem segura o berimbau gunga numa roda tradicional não está ali só tocando: essa pessoa decide quando a roda começa e termina, quem entra pra jogar depois, e até o ritmo que os dois capoeiristas devem seguir. Se o jogo esquentar demais e alguém perder a cabeça, é comum o tocador do gunga mudar o toque ou se aproximar da dupla pra esfriar a disputa. É por isso que se diz, na capoeira, que quem manda na roda é o berimbau."]
+titulos_paginas = ["Quem comanda a roda", "Os três berimbaus", "A responsabilidade do gunga"]
+corpos_paginas = ["Numa roda de capoeira, é o berimbau quem dá o comando. As combinações de toque tocadas sugerem o tipo de jogo que os dois capoeiristas devem praticar, seja um jogo mais lento e rasteiro, mais ousado e maliciosa, mais acrobático ou mais rápido e combativo. Os outros instrumentos, como o pandeiro, atabaque, agogô e reco-reco, entram depois do berimbau, e todos eles, em conjunto, se forma o que chamamos de bateria.", "Uma bateria completa de capoeira costuma reunir três berimbaus afinados de forma diferente. O gunga tem o som mais grave e, na maioria dos grupos, é quem estabelece a base do ritmo que está sendo tocado. O médio fica no meio do caminho, dobrando ou complementando o que o gunga propõe. Já a viola, de som mais agudo, tem liberdade pra improvisar por cima dessa base, soltando repiques e floreios que dão cor à música.", "Quem segura o berimbau gunga numa roda tradicional não está ali só tocando: essa pessoa decide quando um jogo começa e termina, quem entra pra jogar, e até o ritmo que os dois capoeiristas devem praticar, e por carregar tanta responsabilidade, quem assume o gunga em uma roda de capoeira é geralmente um capoeirista experiente, como um Mestre. Se o jogo esquentar demais e alguém perder a cabeça, é comum o tocador do gunga mudar o toque, interromper o jogo ou se aproximar da dupla pra esfriar a disputa. É por isso que se diz, na capoeira, que quem manda na roda é o berimbau gunga."]
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=200228984]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -52,79 +52,81 @@ offset_bottom = 720.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1327387353]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1985429842]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="LabelTitulo" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="LabelTitulo" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1048271760]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1445776533]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="LabelCorpo" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="LabelCorpo" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1154774254]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 16
 theme_override_constants/line_spacing = 6
+theme_override_font_sizes/font_size = 16
 autowrap_mode = 3
 
-[node name="HBoxContainer_Paginacao" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer_Paginacao" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1758207535]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 16
 
-[node name="BtnAnterior" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao"]
+[node name="BtnAnterior" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao" unique_id=1454698645]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 36)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_act_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_act_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
 text = "← Anterior"
 
-[node name="LabelProgresso" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao"]
+[node name="LabelProgresso" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao" unique_id=1500161326]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-vertical_alignment = 1
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="BtnProximo" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao"]
+[node name="BtnProximo" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao" unique_id=1174178430]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 36)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_act_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_act_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
 text = "Próximo →"
 
-[node name="Sep" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Sep" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=1295212347]
 layout_mode = 2
 
-[node name="BtnVoltar" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="BtnVoltar" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=1468965224]
+custom_minimum_size = Vector2(120, 36)
 layout_mode = 2
 size_flags_horizontal = 4
-custom_minimum_size = Vector2(120, 36)
 theme_override_styles/normal = SubResource("StyleBoxFlat_act_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_act_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
 text = "← Voltar"
 
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao/BtnAnterior" to="." method="_on_btn_anterior_pressed"]

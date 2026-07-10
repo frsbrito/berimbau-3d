@@ -1,21 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3 uid="uid://b0fekpj506x5s"]
 
-[ext_resource type="Script" path="res://scenes/menus/conteudo_texto.gd" id="1_conteudo"]
+[ext_resource type="Script" uid="uid://cum7pu6vnl8md" path="res://scenes/menus/conteudo_texto.gd" id="1_conteudo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_act_normal"]
 bg_color = Color(0.25118053, 0.16331753, 0.04786265, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.78431374, 0.6, 0, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_act_hover"]
-bg_color = Color(0.38, 0.25, 0.07, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -33,14 +21,26 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[node name="MenuTimbres" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_act_hover"]
+bg_color = Color(0.38, 0.25, 0.07, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.78431374, 0.6, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="MenuTimbres" type="Control" unique_id=1096067159]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_conteudo")
 titulos_paginas = ["O que muda de um berimbau para o outro", "Do agudo ao grave"]
-corpos_paginas = ["No jogo, você escolhe entre três timbres de berimbau: viola, médio e gunga. Essa escolha não é só estética, ela reproduz uma diferença real de afinação entre os berimbaus usados numa roda de verdade. Cada um tem um tamanho de arame e de cabaça que resulta num som diferente, do mais agudo ao mais grave.", "A viola é o berimbau menor e de som mais agudo, geralmente usado pra fazer variações e repiques por cima do ritmo principal. O médio ocupa a faixa intermediária, servindo de ponte entre os dois extremos. Já o gunga, maior e de som mais grave, costuma carregar a base do ritmo que dá o tom da roda inteira. No simulador, alternar entre eles muda só o timbre do som reproduzido, a lógica de toques, dobrão e baqueta continua a mesma."]
+corpos_paginas = ["Em uma típica roda de capoeira encontramos até três timbres de berimbau: viola, médio e gunga (ou Berra-Boi). Cada um possui uma afinação específica, e devem estar \"casados\" entre si, isto é, afinados um com o outro, de forma a gerar um som consonante ao serem tocados juntos. Sua sonoridade, mais grave ou mais aguda, é definida pelo tamanho da cabaça, seu posicionamento em relação à verga e o tensionamento do arame.", "A viola é o berimbau que geralmente tem a cabaça menor e de som mais agudo, é usado para fazer variações e repiques por cima do ritmo principal, sempre improvisando. O médio ocupa a faixa intermediária, servindo de ponte entre os dois extremos, a viola aguda e o gunga grave. O gunga, por sua vez, é o que possui a cabaça maior e som imponente, mais grave, costuma carregar a base do ritmo que dá o direcionamento da roda inteira, sejam os outros instrumentos, velocidade rítmica, e estilo de jogo praticado pelos jogadores. Aqui no simulador, alternar entre eles muda só o timbre do som reproduzido, a lógica de toques, dobrão e baqueta continua a mesma."]
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=239789659]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -52,79 +52,81 @@ offset_bottom = 720.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1818812653]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=140377606]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="LabelTitulo" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="LabelTitulo" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1383360286]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1927441097]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="LabelCorpo" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="LabelCorpo" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=819409338]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 16
 theme_override_constants/line_spacing = 6
+theme_override_font_sizes/font_size = 16
 autowrap_mode = 3
 
-[node name="HBoxContainer_Paginacao" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer_Paginacao" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=2941252]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 16
 
-[node name="BtnAnterior" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao"]
+[node name="BtnAnterior" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao" unique_id=977140287]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 36)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_act_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_act_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
 text = "← Anterior"
 
-[node name="LabelProgresso" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao"]
+[node name="LabelProgresso" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao" unique_id=503073890]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-vertical_alignment = 1
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="BtnProximo" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao"]
+[node name="BtnProximo" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao" unique_id=534256117]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 36)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_act_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_act_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
 text = "Próximo →"
 
-[node name="Sep" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Sep" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=267391037]
 layout_mode = 2
 
-[node name="BtnVoltar" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="BtnVoltar" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=1370277903]
+custom_minimum_size = Vector2(120, 36)
 layout_mode = 2
 size_flags_horizontal = 4
-custom_minimum_size = Vector2(120, 36)
 theme_override_styles/normal = SubResource("StyleBoxFlat_act_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_act_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_act_hover")
 text = "← Voltar"
 
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer_Paginacao/BtnAnterior" to="." method="_on_btn_anterior_pressed"]

@@ -92,7 +92,7 @@ offset_right = 1267.0
 offset_bottom = 61.0
 text = "Opções"
 
-[node name="Voltar" type="Button" parent="." unique_id=2200000001]
+[node name="Voltar" type="Button" parent="." unique_id=-2094967295]
 layout_mode = 1
 offset_left = 13.0
 offset_top = 659.0

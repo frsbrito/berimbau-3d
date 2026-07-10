@@ -5,6 +5,7 @@ signal finalizar_pressed()
 const MENU_OPCOES_SCENE = preload("res://scenes/menus/menu_opcoes_principal.tscn")
 const GAME_OVER_SCENE_PATH = "res://scenes/game_over.tscn"
 
+@onready var placar_panel = $PlacarPanel
 @onready var acertos_label = $AcertosLabel
 @onready var erros_label = $ErrosLabel
 @onready var porcentagem_label = $PorcentagemLabel
@@ -17,6 +18,7 @@ func _ready():
 	var pratica_livre = GameData.pratica_livre_ativa
 	finalizar_button.visible = GameData.modo_livre_ativo() and not pratica_livre
 	encerrar_button.visible = pratica_livre
+	placar_panel.visible = not pratica_livre
 	acertos_label.visible = not pratica_livre
 	erros_label.visible = not pratica_livre
 	porcentagem_label.visible = not pratica_livre
