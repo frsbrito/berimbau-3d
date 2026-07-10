@@ -13,15 +13,25 @@ signal zoom_alterado(fracao: float)
 @export var zoom_max: float = 30.0
 
 # Tamanho das zonas de controle (fração da tela)
-@export var dobrao_largura_ratio: float = 0.35
+@export var dobrao_largura_ratio: float = 0.3
 @export var dobrao_altura_ratio: float = 0.2
 @export var dobrao_margem_inferior_ratio: float = 0.25
-@export var dobrao_margem_esquerda_ratio: float = 0.025
+@export var dobrao_margem_esquerda_ratio: float = 0.05
 @export var baqueta_largura_ratio: float = 0.40
 @export var baqueta_altura_ratio: float = 0.40
 @export var baqueta_margem_inferior_ratio: float = 0.15
-@export var baqueta_margem_direita_ratio: float = 0.025
+@export var baqueta_margem_direita_ratio: float = -0.04
 @export var baqueta_raio_ratio: float = 0.42
+
+# Alvo de toque mínimo (~48dp, recomendação de acessibilidade) convertido para
+# pixels via DPI real do dispositivo, com piso para telas desktop de baixo DPI.
+const ALVO_TOQUE_MINIMO_DP: float = 48.0
+
+func _alvo_toque_minimo_px() -> float:
+	var dpi = DisplayServer.screen_get_dpi()
+	if dpi <= 0:
+		dpi = 160
+	return maxf(ALVO_TOQUE_MINIMO_DP * dpi / 160.0, 88.0)
 
 var _yaw: float = 0.0
 var _pitch: float = 0.0
@@ -49,19 +59,21 @@ func _init_orbit_from_camera():
 
 func _get_regioes() -> Dictionary:
 	var size = get_viewport().get_visible_rect().size
+	var alvo_min = _alvo_toque_minimo_px()
+
+	var dobrao_w = maxf(size.x * dobrao_largura_ratio, alvo_min)
+	var dobrao_h = maxf(size.y * dobrao_altura_ratio, alvo_min)
+	var dobrao_x = size.x * dobrao_margem_esquerda_ratio
+	var dobrao_y = size.y - size.y * dobrao_margem_inferior_ratio - dobrao_h
+
+	var baqueta_w = maxf(size.x * baqueta_largura_ratio, alvo_min)
+	var baqueta_h = maxf(size.y * baqueta_altura_ratio, alvo_min)
+	var baqueta_x = size.x - size.x * baqueta_margem_direita_ratio - baqueta_w
+	var baqueta_y = size.y - size.y * baqueta_margem_inferior_ratio - baqueta_h
+
 	return {
-		"dobrao": Rect2(
-			size.x * dobrao_margem_esquerda_ratio,
-			size.y * (1.0 - dobrao_altura_ratio) - size.y * dobrao_margem_inferior_ratio,
-			size.x * dobrao_largura_ratio,
-			size.y * dobrao_altura_ratio
-		),
-		"baqueta": Rect2(
-			size.x * (1.0 - baqueta_largura_ratio) - size.x * baqueta_margem_direita_ratio,
-			size.y * (1.0 - baqueta_altura_ratio) - size.y * baqueta_margem_inferior_ratio,
-			size.x * baqueta_largura_ratio,
-			size.y * baqueta_altura_ratio
-		)
+		"dobrao": Rect2(dobrao_x, dobrao_y, dobrao_w, dobrao_h),
+		"baqueta": Rect2(baqueta_x, baqueta_y, baqueta_w, baqueta_h)
 	}
 
 func _baqueta_circulo(rect: Rect2) -> Dictionary:
