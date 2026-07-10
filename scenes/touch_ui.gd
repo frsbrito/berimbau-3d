@@ -2,13 +2,15 @@ extends Node2D
 
 @export var touch_controls: Node
 
-const COR_BAQUETA = Color(0.90, 0.72, 0.10, 0.55)
-const COR_BAQUETA_ATIVO = Color(1.00, 0.88, 0.20, 0.90)
+const COR_BAQUETA = Color(1.00, 1.00, 1.00, 0.55)
+const COR_BAQUETA_ATIVO = Color(1.00, 1.00, 1.00, 0.90)
 const COR_BORDA   = Color(1.00, 1.00, 1.00, 0.45)
 const COR_TEXTO   = Color(1.00, 1.00, 1.00, 1.00)
-const COR_DOBRAO  = Color(0.95, 0.82, 0.30, 1.00)
+const COR_TEXTO_ESCURO = Color(0.05, 0.05, 0.05, 1.00)
+const COR_DOBRAO  = Color(1.00, 1.00, 1.00, 1.00)
 
 const FONT_SIZE = 22
+const FONT_SIZE_DOBRAO = 12
 
 var _dobrao_pos: Vector2 = Vector2.ZERO
 var _inicializado: bool = false
@@ -98,7 +100,11 @@ func _desenhar_dobrao(rect: Rect2):
 	# Círculo do dobrão (a "moeda")
 	var raio = minf(rect.size.y * 0.28, zone_w * 0.38)
 	draw_circle(_dobrao_pos, raio, COR_DOBRAO)
-	draw_arc(_dobrao_pos, raio, 0, TAU, 40, Color(1, 1, 1, 0.5), 2.0)
+	draw_arc(_dobrao_pos, raio, 0, TAU, 40, Color(0, 0, 0, 0.35), 2.0)
+
+	var font = ThemeDB.fallback_font
+	var label_pos = Vector2(_dobrao_pos.x - raio, _dobrao_pos.y + FONT_SIZE_DOBRAO * 0.35)
+	draw_string(font, label_pos, "Dobrão", HORIZONTAL_ALIGNMENT_CENTER, raio * 2.0, FONT_SIZE_DOBRAO, COR_TEXTO_ESCURO)
 
 func _desenhar_baqueta(rect: Rect2):
 	var cor = COR_BAQUETA_ATIVO if _baqueta_ativo else COR_BAQUETA
@@ -110,7 +116,7 @@ func _desenhar_baqueta(rect: Rect2):
 
 	# Glow externo quando ativo
 	if _baqueta_ativo:
-		draw_arc(center, raio + 10, 0, TAU, 48, Color(1.0, 0.88, 0.20, 0.25), 8.0)
+		draw_arc(center, raio + 10, 0, TAU, 48, Color(1.0, 1.0, 1.0, 0.25), 8.0)
 
 	# Círculo interno mais escuro para dar profundidade
 	draw_circle(center, raio, Color(cor.r * 0.5, cor.g * 0.5, cor.b * 0.5, cor.a))
@@ -121,7 +127,7 @@ func _desenhar_baqueta(rect: Rect2):
 	draw_arc(center, raio * 0.88, 0, TAU, 48, Color(1.0, 1.0, 1.0, 0.12), 1.5)
 
 	var font = ThemeDB.fallback_font
-	draw_string(font, Vector2(rect.position.x, center.y + FONT_SIZE * 0.45), "TOCAR", HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, FONT_SIZE + 4, COR_TEXTO)
+	draw_string(font, Vector2(rect.position.x, center.y + FONT_SIZE * 0.45), "BAQUETA", HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, FONT_SIZE + 4, COR_TEXTO_ESCURO)
 
 func _desenhar_zoom_indicador(size: Vector2):
 	if _zoom_tempo_restante <= 0.0:

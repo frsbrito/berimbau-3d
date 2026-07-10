@@ -10,9 +10,10 @@ const TIPO_CHIADO = 2
 const TIPO_PRESO = 3
 
 # --- Cor de identificação por tipo de nota (fonte única para a UI) ---
-const COR_TIPO_SOLTO  = Color(0.55, 0.55, 0.55)
-const COR_TIPO_CHIADO = Color(0.20, 0.55, 0.90)
-const COR_TIPO_PRESO  = Color(0.85, 0.25, 0.15)
+# Paleta inspirada nas cores do Brasil (verde, amarelo, azul).
+const COR_TIPO_SOLTO  = Color(0.11, 0.58, 0.35)
+const COR_TIPO_CHIADO = Color(1.00, 0.83, 0.00)
+const COR_TIPO_PRESO  = Color(0.05, 0.20, 0.55)
 
 func cor_por_tipo(tipo: int) -> Color:
 	match tipo:
