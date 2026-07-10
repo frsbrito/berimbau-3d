@@ -36,6 +36,13 @@ var houve_alteracao: bool = false
 @onready var vbox_modo_coluna = %VBoxContainer_Modo
 @onready var separador_modo_coluna = %VSeparator2
 
+@onready var sep_velocidade = %Sep2
+@onready var label_velocidade = %Label_Velocidade
+@onready var hbox_velocidade = %HBoxContainer_Velocidade
+
+@onready var separador_repique_coluna = %VSeparator
+@onready var vbox_repique_coluna = %VBoxContainer_Right
+
 @onready var label_qtd_notas = %Label_QtdNotas
 @onready var hbox_qtd_notas  = %HBoxContainer_QtdNotas
 
@@ -137,11 +144,18 @@ func _on_btn_pratica_livre_pressed():
 	btn_sb_pequeno.button_pressed = false
 	_atualizar_visibilidade_modo_coluna()
 
-# A coluna de Modo/Quantidade de notas não faz sentido em Prática Livre
-# (não há notas nem placar), então ela some enquanto essa opção estiver ativa.
+# Velocidade, Repique e Modo/Quantidade de notas não fazem sentido em
+# Prática Livre (não há notas nem placar), então somem enquanto essa opção
+# estiver ativa.
 func _atualizar_visibilidade_modo_coluna():
-	vbox_modo_coluna.visible = not GameData.pratica_livre_ativa
-	separador_modo_coluna.visible = not GameData.pratica_livre_ativa
+	var visivel = not GameData.pratica_livre_ativa
+	vbox_modo_coluna.visible = visivel
+	separador_modo_coluna.visible = visivel
+	sep_velocidade.visible = visivel
+	label_velocidade.visible = visivel
+	hbox_velocidade.visible = visivel
+	vbox_repique_coluna.visible = visivel
+	separador_repique_coluna.visible = visivel
 
 func _on_btn_lento_pressed():
 	houve_alteracao = true

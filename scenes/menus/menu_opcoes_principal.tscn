@@ -280,7 +280,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_xhf77")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_arkbk")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_toques")
-text = "S. Bento Grande"
+text = "São Bento Grande"
 
 [node name="BtnSBPequeno" type="Button" parent="Panel/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer_Columns/VBoxContainer_Left/VBoxContainer_Toques" unique_id=497381425]
 unique_name_in_owner = true
@@ -292,7 +292,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_xhf77")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_arkbk")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_toques")
-text = "S. Bento Pequeno"
+text = "São Bento Pequeno"
 
 [node name="BtnPraticaLivre" type="Button" parent="Panel/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer_Columns/VBoxContainer_Left/VBoxContainer_Toques" unique_id=800000001]
 unique_name_in_owner = true
@@ -307,15 +307,18 @@ button_group = SubResource("ButtonGroup_toques")
 text = "Prática Livre"
 
 [node name="Sep2" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer_Columns/VBoxContainer_Left" unique_id=331244552]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Label_Velocidade" type="Label" parent="Panel/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer_Columns/VBoxContainer_Left" unique_id=182351542]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Velocidade"
 horizontal_alignment = 1
 
 [node name="HBoxContainer_Velocidade" type="HBoxContainer" parent="Panel/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer_Columns/VBoxContainer_Left" unique_id=1334887045]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 8
 
@@ -350,9 +353,11 @@ button_group = SubResource("ButtonGroup_velocidade")
 text = "Rápido"
 
 [node name="VSeparator" type="VSeparator" parent="Panel/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer_Columns" unique_id=441355662]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="VBoxContainer_Right" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer_Columns" unique_id=441355663]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
